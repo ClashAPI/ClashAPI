@@ -1,0 +1,234 @@
+<ngx-ui-loader *ngIf="isLoading"></ngx-ui-loader>
+<app-announcements *ngIf="!isLoading"></app-announcements>
+<div class="container" *ngIf="!isLoading">
+  <div id="stats">
+    <div class="card border-white">
+      <ng-container *ngIf="player != null">
+        <app-player-header [player]="player"></app-player-header>
+      </ng-container>
+    </div>
+    <div class="container container-fluid mb-2">
+      <div class="card-body bg-white">
+        <ng-container *ngIf="playerBattles">
+          <ng-container *ngFor="let battle of playerBattles">
+            <ng-container *ngIf="battle.team[0].crowns > battle.opponent[0].crowns">
+              <hr class="bg-primary mt-0" style="height: 3px;"/>
+            </ng-container>
+            <ng-container *ngIf="battle.team[0].crowns === battle.opponent[0].crowns">
+              <hr class="bg-secondary mt-0" style="height: 3px;"/>
+            </ng-container>
+            <ng-container *ngIf="battle.team[0].crowns < battle.opponent[0].crowns">
+              <hr class="bg-danger mt-0" style="height: 3px;"/>
+            </ng-container>
+            <section class="text-center pb-2 h5">
+              <ng-container *ngIf="battle.team[0].crowns > battle.opponent[0].crowns">
+                <span class="badge badge-primary float-left">Győzelem</span>
+              </ng-container>
+              <ng-container
+                *ngIf="battle.team[0].crowns === battle.opponent[0].crowns">
+                <span class="badge badge-secondary float-left"
+                >Döntetlen</span>
+              </ng-container>
+              <ng-container *ngIf="battle.team[0].crowns < battle.opponent[0].crowns">
+                <span class="badge badge-danger float-left">Vereség</span>
+              </ng-container>
+              <span class="font-weight-bold mr-5 pr-3">
+                <ng-container *ngIf="battle.gameMode != null; else noMode">
+                  <span>{{ battle.gameMode.name }}</span>
+                </ng-container>
+                <ng-template #noMode>
+                  <span>{{ battle.type }}</span>
+                </ng-template> </span
+              ><br/>
+              <img src="assets/crown-blue.png" style="width: 25px;"/>
+              <span class="px-2"
+              >{{ battle.team[0].crowns }} - {{ battle.opponent[0].crowns }}</span>
+              <img src="assets/crown-red.png" style="width: 25px;"/>
+            </section>
+            <div class="row">
+              <div class="col-6 text-left p-0 border-right">
+                <div class="card border-0">
+                  <div class="card-body">
+                    <ng-container *ngFor="let item of battle.team">
+                      <div class="container pb-2">
+                        <span class="font-weight-bold">
+                          <a
+                            [routerLink]="['/player/' + item.tag.substr(1)]"
+                            class="text-dark"
+                            style="text-decoration: none;"
+                          >{{ item.name }}</a> </span><br/>
+                        <span>
+                          <ng-container *ngIf="item.clan != null">
+                            <a [routerLink]="['/clan/' + item.clan.tag.substr(1)]">{{
+                              item.clan.name
+                              }}</a>
+                          </ng-container>
+                          </span
+                        ><br/>
+                        <h5 *ngIf="item.startingTrophies != 0">
+                          <span
+                            class="badge badge-light text-dark p-2 mr-2"
+                          >{{ item.startingTrophies }}</span
+                          >
+                          <ng-container *ngIf="item.trophyChange < 0">
+                            <span
+                              class="badge border border-danger text-danger"
+                            ><span class="mr-1">{{
+                              item.trophyChange
+                              }}</span>
+                              {{
+                              item.startingTrophies + item.trophyChange
+                              }}</span
+                            >
+                          </ng-container>
+                          <ng-container *ngIf="item.trophyChange > 0">
+                            <span
+                              class="badge border border-primary text-primary"
+                            ><span class="mr-1"
+                            >+{{ item.trophyChange }}</span
+                            >
+                              {{
+                              item.startingTrophies + item.trophyChange
+                              }}</span
+                            >
+                          </ng-container>
+                        </h5>
+                        <div class="row pt-2">
+                          <ng-container
+                            *ngFor="let card of item.cards; index as j"
+                          >
+                            <ng-container *ngIf="j === 4">
+                              <div class="w-100 pb-2"></div>
+                            </ng-container>
+                            <div class="col p-0">
+                              <img
+                                src="{{ card.iconUrls.medium }}"
+                                class="card-img-top img-fluid"
+                              />
+                              <section class="text-center py-1">
+                                <ng-container [ngSwitch]="card.maxLevel">
+                                  <ng-container *ngSwitchCase="13">
+                                    Level {{card.level}}
+                                  </ng-container>
+                                  <ng-container *ngSwitchCase="11">
+                                    Level {{card.level + 2}}
+                                  </ng-container>
+                                  <ng-container *ngSwitchCase="8">
+                                    Level {{card.level + 5}}
+                                  </ng-container>
+                                  <ng-container *ngSwitchCase="5">
+                                    Level {{card.level + 8}}
+                                  </ng-container>
+                                </ng-container>
+                              </section>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 text-right m-0 p-0">
+                <div class="card border-0">
+                  <div class="card-body">
+                    <ng-container *ngFor="let item of battle.opponent">
+                      <div class="container pb-2">
+                        <span class="font-weight-bold">
+                          <a
+                            [routerLink]="['/player/' + item.tag.substr(1)]"
+                            class="text-dark"
+                            style="text-decoration: none;"
+                          >{{ item.name }}</a
+                          > </span
+                        ><br/>
+                        <span>
+                          <ng-container *ngIf="item.clan != null">
+                            <a [routerLink]="['/clan/' + item.clan.tag.substr(1)]">{{
+                              item.clan.name
+                              }}</a>
+                          </ng-container>
+                          </span
+                        ><br/>
+                        <h5 *ngIf="item.startingTrophies != 0">
+                          <span
+                            class="badge badge-light text-dark p-2 mr-2"
+                          >{{ item.startingTrophies }}</span
+                          >
+                          <ng-container *ngIf="item.trophyChange < 0">
+                            <span
+                              class="badge border border-danger text-danger"
+                            ><span class="mr-1">{{
+                              item.trophyChange
+                              }}</span>
+                              {{
+                              item.startingTrophies + item.trophyChange
+                              }}</span
+                            >
+                          </ng-container>
+                          <ng-container *ngIf="item.trophyChange > 0">
+                            <span
+                              class="badge border border-primary text-primary"
+                            ><span class="mr-1"
+                            >+{{ item.trophyChange }}</span
+                            >
+                              {{
+                              item.startingTrophies + item.trophyChange
+                              }}</span
+                            >
+                          </ng-container>
+                        </h5>
+                        <div class="row pt-2">
+                          <ng-container
+                            *ngFor="let card of item.cards; index as j"
+                          >
+                            <ng-container *ngIf="j === 4">
+                              <div class="w-100 pb-2"></div>
+                            </ng-container>
+                            <div class="col p-0">
+                              <img
+                                src="{{ card.iconUrls.medium }}"
+                                class="card-img-top img-fluid"
+                              />
+                              <section class="text-center py-1">
+                                <ng-container [ngSwitch]="card.maxLevel">
+                                  <ng-container *ngSwitchCase="13">
+                                    Level {{card.level}}
+                                  </ng-container>
+                                  <ng-container *ngSwitchCase="11">
+                                    Level {{card.level + 2}}
+                                  </ng-container>
+                                  <ng-container *ngSwitchCase="8">
+                                    Level {{card.level + 5}}
+                                  </ng-container>
+                                  <ng-container *ngSwitchCase="5">
+                                    Level {{card.level + 8}}
+                                  </ng-container>
+                                </ng-container>
+                              </section>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+              <div class="container pb-3">
+                <time class="pl-3">{{
+                  battle.battleTime | amLocale: "hu" | amTimeAgo
+                  }}</time>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="playerBattles.length === 0">
+          <h4 class="text-center">
+            <strong>{{ player.name }}</strong> játékosnak nincs lekérdezhető
+            csatája
+          </h4>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

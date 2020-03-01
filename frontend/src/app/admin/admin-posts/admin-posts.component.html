@@ -1,0 +1,152 @@
+<ngx-ui-loader *ngIf="isLoading"></ngx-ui-loader>
+<app-announcements></app-announcements>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h5>Cikkek</h5>
+          <hr>
+          <div class="my-3">
+            <!--
+            <button class="btn btn-primary mr-2" role="button" (click)="getPosts()"><i class="fas fa-sync"></i> Adatok frissítése</button>
+            -->
+            <button class="btn btn-primary" role="button" (click)="lgModal.show()"><i class="fa fa-plus"></i> Új cikk</button>
+          </div>
+          <div class="table-responsive">
+            <table datatable [dtOptions]="dtOptions" class="table table-striped table-hover" *ngIf="!this.isLoading">
+              <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Cím</th>
+                <th scope="col">Szerző</th>
+                <th scope="col">Látható?</th>
+                <th scope="col">Bejegyzés dátuma</th>
+                <td></td>
+              </tr>
+              </thead>
+              <tbody>
+              <ng-container *ngFor="let post of posts; index as i">
+                <tr>
+                  <th scope="row">{{post.id}}</th>
+                  <td>{{post.title}}</td>
+                  <td>{{post.userName}}</td>
+                  <td>{{post.isVisible ? "Igen" : "Nem"}}</td>
+                  <td>{{post.createdAt | amDateFormat: 'YYYY. MM. DD. HH:mm' }}</td>
+                  <td class="text-right" style="white-space: nowrap;">
+                    <span class="fas fa-search mr-3" tooltip="Megtekintés" style="cursor: pointer;" (click)="openModal(postInfoModal, post)"></span>
+                    <span class="fas fa-pen mr-3" tooltip="Szerkesztés" style="cursor: pointer;" (click)="openModal(postEditModal, post)"></span>
+                    <span class="fas fa-times text-danger" tooltip="Törlés" style="cursor: pointer;" (click)="deletePost(post, i)"></span>
+                  </td>
+                </tr>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1"
+     role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form #form="ngForm" (ngSubmit)="addPost(); form.reset()">
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">{{title.value ? title.value : 'Új cikk'}}</h4>
+          <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Bezárás">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="title">Cím</label>
+            <input #title type="text" class="form-control" name="title" id="title" [(ngModel)]="model.title">
+          </div>
+          <div class="form-group">
+            <label for="content">Tartalom</label>
+            <ckeditor [editor]="editor" name="content" id="content" [(ngModel)]="model.content" data=" "></ckeditor>
+          </div>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" name="isVisible" id="isVisible" [(ngModel)]="model.isVisible">
+            <label class="form-check-label" for="isVisible">Látható?</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="lgModal.hide()">Mégsem</button>
+          <button type="submit" class="btn btn-primary mr-2" (click)="lgModal.hide()">Mentés</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<ng-template #postInfoModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Cikk adatai - {{post.title}}</h4>
+    <button type="button" class="close pull-right" aria-label="Bezárás" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label>ID</label>
+      <input type="text" class="form-control" [value]="post.id" disabled>
+    </div>
+    <div class="form-group">
+      <label>Cím</label>
+      <input type="text" class="form-control" [value]="post.title" disabled>
+    </div>
+    <div class="form-group">
+      <label>Tartalom</label>
+      <ckeditor [editor]="editor" [data]="post.content" disabled="disabled"></ckeditor>
+    </div>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" [value]="post.isVisible" [checked]="!!post.isVisible" disabled>
+      <label class="form-check-label">Látható?</label>
+    </div>
+    <div class="form-group">
+      <label>Létrehozás dátuma</label>
+      <input type="text" class="form-control" [value]="post.createdAt | amLocale: 'hu' | amDateFormat: 'YYYY. MM. DD. HH:mm'" disabled>
+    </div>
+    <div class="form-group" *ngIf="post.createdAt !== post.updatedAt">
+      <label>Módosítás dátuma</label>
+      <input type="text" class="form-control" [value]="post.updatedAt | amLocale: 'hu' | amDateFormat: 'YYYY. MM. DD. HH:mm'" disabled>
+    </div>
+    <div class="modal-footer mt-4 pb-0">
+      <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Bezárás</button>
+    </div>
+  </div>
+</ng-template>
+<ng-template #postEditModal>
+  <form #form="ngForm" (ngSubmit)="updatePost()">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Cikk szerkesztése - {{post.title}}</h4>
+      <button type="button" class="close pull-right" aria-label="Bezárás" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>ID</label>
+        <input type="text" class="form-control" [value]="post.id" disabled>
+      </div>
+      <div class="form-group">
+        <label>Cím</label>
+        <input type="text" class="form-control" [value]="post.title" [(ngModel)]="post.title" name="title">
+      </div>
+      <div class="form-group">
+        <label>Tartalom</label>
+        <ckeditor [editor]="editor" [data]="post.content" [(ngModel)]="post.content" name="content"></ckeditor>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" [checked]="!!post.isVisible" [(ngModel)]="post.isVisible" name="isVisible">
+        <label class="form-check-label" (click)="post.isVisible = !post.isVisible">Látható?</label>
+      </div>
+      <div class="modal-footer mt-4 pb-0">
+        <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Bezárás</button>
+        <button type="submit" class="btn btn-primary" (click)="modalRef.hide()">Mentés</button>
+      </div>
+    </div>
+  </form>
+</ng-template>

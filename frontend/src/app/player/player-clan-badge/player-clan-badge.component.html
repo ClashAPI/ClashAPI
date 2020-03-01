@@ -1,0 +1,720 @@
+<ng-container *ngIf="!player.hasOwnProperty('clan')">
+  <img class="mr-2" src="assets/clan-badges/no_clan.png" height="35"
+       width="30" alt="">
+</ng-container>
+<ng-container *ngIf="player.hasOwnProperty('clan')">
+  <ng-container [ngSwitch]="player.clan.badgeId">
+    <ng-container *ngSwitchCase="16000075">
+      <img class="mr-2" src="assets/clan-badges/flag_j_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000076">
+      <img class="mr-2" src="assets/clan-badges/flag_j_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000077">
+      <img class="mr-2" src="assets/clan-badges/flag_j_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000090">
+      <img class="mr-2" src="assets/clan-badges/flag_n_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000091">
+      <img class="mr-2" src="assets/clan-badges/flag_n_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000092">
+      <img class="mr-2" src="assets/clan-badges/flag_n_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000093">
+      <img class="mr-2" src="assets/clan-badges/flag_n_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000094">
+      <img class="mr-2" src="assets/clan-badges/flag_n_05.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000095">
+      <img class="mr-2" src="assets/clan-badges/flag_n_06.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000096">
+      <img class="mr-2" src="assets/clan-badges/Twin_Peaks_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000097">
+      <img class="mr-2" src="assets/clan-badges/Twin_Peaks_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000000">
+      <img class="mr-2" src="assets/clan-badges/Flame_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000001">
+      <img class="mr-2" src="assets/clan-badges/Flame_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000002">
+      <img class="mr-2" src="assets/clan-badges/Flame_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000003">
+      <img class="mr-2" src="assets/clan-badges/Flame_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000008">
+      <img class="mr-2" src="assets/clan-badges/Bolt_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000009">
+      <img class="mr-2" src="assets/clan-badges/Bolt_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000010">
+      <img class="mr-2" src="assets/clan-badges/Bolt_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000011">
+      <img class="mr-2" src="assets/clan-badges/Bolt_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000136">
+      <img class="mr-2" src="assets/clan-badges/Bamboo_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000137">
+      <img class="mr-2" src="assets/clan-badges/Bamboo_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000138">
+      <img class="mr-2" src="assets/clan-badges/Bamboo_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000139">
+      <img class="mr-2" src="assets/clan-badges/Bamboo_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000106">
+      <img class="mr-2" src="assets/clan-badges/Elixir_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000107">
+      <img class="mr-2" src="assets/clan-badges/Elixir_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000120">
+      <img class="mr-2" src="assets/clan-badges/Fugi_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000121">
+      <img class="mr-2" src="assets/clan-badges/Fugi_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000122">
+      <img class="mr-2" src="assets/clan-badges/Fugi_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000123">
+      <img class="mr-2" src="assets/clan-badges/Fugi_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000016">
+      <img class="mr-2" src="assets/clan-badges/Arrow_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000017">
+      <img class="mr-2" src="assets/clan-badges/Arrow_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000018">
+      <img class="mr-2" src="assets/clan-badges/Arrow_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000019">
+      <img class="mr-2" src="assets/clan-badges/Arrow_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000024">
+      <img class="mr-2" src="assets/clan-badges/Skull_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000025">
+      <img class="mr-2" src="assets/clan-badges/Skull_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000026">
+      <img class="mr-2" src="assets/clan-badges/Skull_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000027">
+      <img class="mr-2" src="assets/clan-badges/Skull_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000028">
+      <img class="mr-2" src="assets/clan-badges/Skull_05.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000029">
+      <img class="mr-2" src="assets/clan-badges/Skull_06.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000166">
+      <img class="mr-2" src="assets/clan-badges/A_Char_Rocket_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000167">
+      <img class="mr-2" src="assets/clan-badges/A_Char_Rocket_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000004">
+      <img class="mr-2" src="assets/clan-badges/Sword_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000005">
+      <img class="mr-2" src="assets/clan-badges/Sword_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000006">
+      <img class="mr-2" src="assets/clan-badges/Sword_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000007">
+      <img class="mr-2" src="assets/clan-badges/Sword_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000126">
+      <img class="mr-2" src="assets/clan-badges/flag_c_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000127">
+      <img class="mr-2" src="assets/clan-badges/flag_c_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000128">
+      <img class="mr-2" src="assets/clan-badges/flag_c_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000129">
+      <img class="mr-2" src="assets/clan-badges/flag_c_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000130">
+      <img class="mr-2" src="assets/clan-badges/flag_c_05.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000131">
+      <img class="mr-2" src="assets/clan-badges/flag_c_06.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000132">
+      <img class="mr-2" src="assets/clan-badges/flag_c_07.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000133">
+      <img class="mr-2" src="assets/clan-badges/flag_c_08.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000144">
+      <img class="mr-2" src="assets/clan-badges/A_Char_King_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000145">
+      <img class="mr-2" src="assets/clan-badges/A_Char_King_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000146">
+      <img class="mr-2" src="assets/clan-badges/A_Char_King_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000147">
+      <img class="mr-2" src="assets/clan-badges/A_Char_King_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000036">
+      <img class="mr-2" src="assets/clan-badges/Traditional_Star_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000037">
+      <img class="mr-2" src="assets/clan-badges/Traditional_Star_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000038">
+      <img class="mr-2" src="assets/clan-badges/Traditional_Star_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000039">
+      <img class="mr-2" src="assets/clan-badges/Traditional_Star_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000040">
+      <img class="mr-2" src="assets/clan-badges/Traditional_Star_05.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000041">
+      <img class="mr-2" src="assets/clan-badges/Traditional_Star_06.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000042">
+      <img class="mr-2" src="assets/clan-badges/Star_Shine_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000043">
+      <img class="mr-2" src="assets/clan-badges/Star_Shine_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000044">
+      <img class="mr-2" src="assets/clan-badges/Star_Shine_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000060">
+      <img class="mr-2" src="assets/clan-badges/flag_d_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000061">
+      <img class="mr-2" src="assets/clan-badges/flag_d_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000062">
+      <img class="mr-2" src="assets/clan-badges/flag_d_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000063">
+      <img class="mr-2" src="assets/clan-badges/flag_d_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000064">
+      <img class="mr-2" src="assets/clan-badges/flag_d_05.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000065">
+      <img class="mr-2" src="assets/clan-badges/flag_d_06.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000175">
+      <img class="mr-2" src="assets/clan-badges/A_Char_Prince_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000176">
+      <img class="mr-2" src="assets/clan-badges/A_Char_Prince_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000177">
+      <img class="mr-2" src="assets/clan-badges/A_Char_Prince_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000012">
+      <img class="mr-2" src="assets/clan-badges/Crown_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000013">
+      <img class="mr-2" src="assets/clan-badges/Crown_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000014">
+      <img class="mr-2" src="assets/clan-badges/Crown_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000015">
+      <img class="mr-2" src="assets/clan-badges/Crown_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000116">
+      <img class="mr-2" src="assets/clan-badges/Fan_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000117">
+      <img class="mr-2" src="assets/clan-badges/Fan_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000118">
+      <img class="mr-2" src="assets/clan-badges/Fan_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000119">
+      <img class="mr-2" src="assets/clan-badges/Fan_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000048">
+      <img class="mr-2" src="assets/clan-badges/flag_a_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000049">
+      <img class="mr-2" src="assets/clan-badges/flag_a_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000050">
+      <img class="mr-2" src="assets/clan-badges/flag_a_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000156">
+      <img class="mr-2" src="assets/clan-badges/A_Char_DarkPrince_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000157">
+      <img class="mr-2" src="assets/clan-badges/A_Char_DarkPrince_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000158">
+      <img class="mr-2" src="assets/clan-badges/A_Char_DarkPrince_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000159">
+      <img class="mr-2" src="assets/clan-badges/A_Char_DarkPrince_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000128">
+      <img class="mr-2" src="assets/clan-badges/Cherry_Blossom_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000129">
+      <img class="mr-2" src="assets/clan-badges/Cherry_Blossom_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000130">
+      <img class="mr-2" src="assets/clan-badges/Cherry_Blossom_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000131">
+      <img class="mr-2" src="assets/clan-badges/Cherry_Blossom_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000132">
+      <img class="mr-2" src="assets/clan-badges/Cherry_Blossom_05.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000133">
+      <img class="mr-2" src="assets/clan-badges/Cherry_Blossom_06.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000134">
+      <img class="mr-2" src="assets/clan-badges/Cherry_Blossom_07.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000135">
+      <img class="mr-2" src="assets/clan-badges/Cherry_Blossom_08.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000164">
+      <img class="mr-2" src="assets/clan-badges/A_Char_Hammer_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000165">
+      <img class="mr-2" src="assets/clan-badges/A_Char_Hammer_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000142">
+      <img class="mr-2" src="assets/clan-badges/Lotus_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000143">
+      <img class="mr-2" src="assets/clan-badges/Lotus_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000178">
+      <img class="mr-2" src="assets/clan-badges/A_Char_Bomb_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000179">
+      <img class="mr-2" src="assets/clan-badges/A_Char_Bomb_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000140">
+      <img class="mr-2" src="assets/clan-badges/Orange_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000141">
+      <img class="mr-2" src="assets/clan-badges/Orange_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000168">
+      <img class="mr-2" src="assets/clan-badges/Freeze_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000169">
+      <img class="mr-2" src="assets/clan-badges/Freeze_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000020">
+      <img class="mr-2" src="assets/clan-badges/Diamond_Star_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000021">
+      <img class="mr-2" src="assets/clan-badges/Diamond_Star_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000022">
+      <img class="mr-2" src="assets/clan-badges/Diamond_Star_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000023">
+      <img class="mr-2" src="assets/clan-badges/Diamond_Star_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000068">
+      <img class="mr-2" src="assets/clan-badges/flag_g_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000069">
+      <img class="mr-2" src="assets/clan-badges/flag_g_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000098">
+      <img class="mr-2" src="assets/clan-badges/Gem_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000099">
+      <img class="mr-2" src="assets/clan-badges/Gem_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000100">
+      <img class="mr-2" src="assets/clan-badges/Gem_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000101">
+      <img class="mr-2" src="assets/clan-badges/Gem_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000124">
+      <img class="mr-2" src="assets/clan-badges/YingYang_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000125">
+      <img class="mr-2" src="assets/clan-badges/YingYang_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000030">
+      <img class="mr-2" src="assets/clan-badges/Moon_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000031">
+      <img class="mr-2" src="assets/clan-badges/Moon_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000032">
+      <img class="mr-2" src="assets/clan-badges/Moon_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000066">
+      <img class="mr-2" src="assets/clan-badges/flag_f_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000067">
+      <img class="mr-2" src="assets/clan-badges/flag_f_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000108">
+      <img class="mr-2" src="assets/clan-badges/Heart_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000109">
+      <img class="mr-2" src="assets/clan-badges/Heart_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000110">
+      <img class="mr-2" src="assets/clan-badges/Heart_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000111">
+      <img class="mr-2" src="assets/clan-badges/Heart_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000033">
+      <img class="mr-2" src="assets/clan-badges/Pine_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000034">
+      <img class="mr-2" src="assets/clan-badges/Pine_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000035">
+      <img class="mr-2" src="assets/clan-badges/Pine_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000084">
+      <img class="mr-2" src="assets/clan-badges/flag_l_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000085">
+      <img class="mr-2" src="assets/clan-badges/flag_l_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000086">
+      <img class="mr-2" src="assets/clan-badges/flag_l_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000078">
+      <img class="mr-2" src="assets/clan-badges/flag_k_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000079">
+      <img class="mr-2" src="assets/clan-badges/flag_k_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000080">
+      <img class="mr-2" src="assets/clan-badges/flag_k_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000081">
+      <img class="mr-2" src="assets/clan-badges/flag_k_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000082">
+      <img class="mr-2" src="assets/clan-badges/flag_k_05.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000083">
+      <img class="mr-2" src="assets/clan-badges/flag_k_06.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000045">
+      <img class="mr-2" src="assets/clan-badges/Diamond_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000046">
+      <img class="mr-2" src="assets/clan-badges/Diamond_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000047">
+      <img class="mr-2" src="assets/clan-badges/Diamond_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000170">
+      <img class="mr-2" src="assets/clan-badges/Clover_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000171">
+      <img class="mr-2" src="assets/clan-badges/Clover_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000154">
+      <img class="mr-2" src="assets/clan-badges/A_Char_Goblin_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000155">
+      <img class="mr-2" src="assets/clan-badges/A_Char_Goblin_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000160">
+      <img class="mr-2" src="assets/clan-badges/A_Char_MiniPekka_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000161">
+      <img class="mr-2" src="assets/clan-badges/A_Char_MiniPekka_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000087">
+      <img class="mr-2" src="assets/clan-badges/flag_m_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000088">
+      <img class="mr-2" src="assets/clan-badges/flag_m_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000089">
+      <img class="mr-2" src="assets/clan-badges/flag_m_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000169">
+      <img class="mr-2" src="assets/clan-badges/flag_h_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000170">
+      <img class="mr-2" src="assets/clan-badges/flag_h_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000171">
+      <img class="mr-2" src="assets/clan-badges/flag_h_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000172">
+      <img class="mr-2" src="assets/clan-badges/flag_h_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000051">
+      <img class="mr-2" src="assets/clan-badges/flag_b_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000052">
+      <img class="mr-2" src="assets/clan-badges/flag_b_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000053">
+      <img class="mr-2" src="assets/clan-badges/flag_b_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000174">
+      <img class="mr-2" src="assets/clan-badges/A_Char_Barbarian_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000175">
+      <img class="mr-2" src="assets/clan-badges/A_Char_Barbarian_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000176">
+      <img class="mr-2" src="assets/clan-badges/A_Char_Barbarian_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000172">
+      <img class="mr-2" src="assets/clan-badges/flag_i_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000173">
+      <img class="mr-2" src="assets/clan-badges/flag_i_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000174">
+      <img class="mr-2" src="assets/clan-badges/flag_i_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000112">
+      <img class="mr-2" src="assets/clan-badges/Tower_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000113">
+      <img class="mr-2" src="assets/clan-badges/Tower_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000114">
+      <img class="mr-2" src="assets/clan-badges/Tower_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000115">
+      <img class="mr-2" src="assets/clan-badges/Tower_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000152">
+      <img class="mr-2" src="assets/clan-badges/A_Char_Knight_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000153">
+      <img class="mr-2" src="assets/clan-badges/A_Char_Knight_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000102">
+      <img class="mr-2" src="assets/clan-badges/Coin_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000103">
+      <img class="mr-2" src="assets/clan-badges/Coin_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000104">
+      <img class="mr-2" src="assets/clan-badges/Coin_03.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000105">
+      <img class="mr-2" src="assets/clan-badges/Coin_04.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000172">
+      <img class="mr-2" src="assets/clan-badges/flag_e_01.png" height="35"
+           width="30" alt="">
+    </ng-container>
+    <ng-container *ngSwitchCase="16000173">
+      <img class="mr-2" src="assets/clan-badges/flag_e_02.png" height="35"
+           width="30" alt="">
+    </ng-container>
+  </ng-container>
+</ng-container>

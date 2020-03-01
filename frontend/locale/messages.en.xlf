@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="member" datatype="html">
+        <source>
+          Tag
+        </source>
+        <target state="new">Member</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/player/player-clan-role/player-clan-role.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="elder" datatype="html">
+        <source>
+          Rangidős tag
+        </source>
+        <target state="new">Elder</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/player/player-clan-role/player-clan-role.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="coLeader" datatype="html">
+        <source>
+          Társvezető
+        </source>
+        <target state="new">Co-leader</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/player/player-clan-role/player-clan-role.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="leader" datatype="html">
+        <source>
+          Vezető
+        </source>
+        <target state="new">Leader</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/player/player-clan-role/player-clan-role.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8f4a1dc45379d32f1e690877fd346061f0525bc2" datatype="html">
+              <source>Lekérdezés</source>
+              <target state="new">Query</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">14</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="15722a31f3843a4c7ce6834a0ef111bfa94a58b9" datatype="html">
+              <source>
+                    Toplista
+                  </source>
+                  <target state="new">Toplist</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">17</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="347d00cda0f53c5edda966c44dc2d9cd5f6f638f" datatype="html">
+              <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Játékosok</source>
+              <target state="new">Players</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">21</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="d7b127e85d012985c4da2c1f6a349949d88938e9" datatype="html">
+              <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Klánok</source>
+              <target state="new">Clans</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">22</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="4dc824a13a420f3b280d84b6d23542da54ffc9cb" datatype="html">
+              <source>
+                    Közösség
+                  </source>
+                  <target state="new">Community</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">26</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="c7c2ed0654a7dee9b068c59c169e97d00f68b701" datatype="html">
+              <source>
+                    Oldalak
+                  </source>
+                  <target state="new">Sites</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">37</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="dcb28b75b09ecea70ecd29cdb45245053e98955b" datatype="html">
+              <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Atlassian Cloud</source>
+              <target state="new">Atlassian Cloud</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">42</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="c7bdaeb92f990e87792d692f6a5c47e85b020c9e" datatype="html">
+              <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Sentry SaaS</source>
+              <target state="new">Sentry SaaS</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">44</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="4708534c8b2cc77f884517679ef67b6b58f1dad7" datatype="html">
+              <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> GitHub Repo</source>
+              <target state="new">GitHub Repo</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">46</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="9a38368df4e741e8e46ad91dff8d4f75bc47a095" datatype="html">
+              <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Fejlesztői blog</source>
+              <target state="new">Developer's blog</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">48</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="64d789dc9a800e641c646d9881fca2e398a781cc" datatype="html">
+              <source>Segítség</source>
+              <target state="new">Help</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">52</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="3bbceb57d49c6dcc9cca147cdf092d2f44e27e2a" datatype="html">
+              <source>Szponzorok</source>
+              <target state="new">Sponsors</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">55</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="7a62195baddbd9a3c481dd8efa24b0be6df242a3" datatype="html">
+              <source>Regisztráció</source>
+              <target state="new">Registration</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">60</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="98c12ff8d2c511d64af50898423c1afb8538d931" datatype="html">
+              <source>Bejelentkezés</source>
+              <target state="new">Login</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">63</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="f57219f13d8c7eeb9d85e723145d3553affb7409" datatype="html">
+              <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Állapot</source>
+              <target state="new">Health</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">70</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="c2d7ccad47addc34fc239bd3019f729a58ce80e5" datatype="html">
+              <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Közlemények</source>
+              <target state="new">Announcements</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">71</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="eea04d8ea2c2a9967996b48d1d97435a986394e6" datatype="html">
+              <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Cikkek</source>
+              <target state="new">Posts</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">72</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="83a325e096039918e5f08ac5120567a8a8255487" datatype="html">
+              <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Felhasználók</source>
+              <target state="new">Users</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">73</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="4426983be947e859b98a7977aedfc9534dafe29f" datatype="html">
+              <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Jogosultságok</source>
+              <target state="new">Permissions</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">74</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="24cea6f66cc26c659c14fe3ab7d218c1e9d22aee" datatype="html">
+              <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Profil</source>
+              <target state="new">Profile</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">82</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="d3ebe37aa4b01db7b2b009253ebf85d305e98051" datatype="html">
+              <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> CR profil</source>
+              <target state="new">CR profile</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">83</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="63dbd4a5577a72c385aada41c4b3e9bc6a8fd6b9" datatype="html">
+              <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Követések</source>
+              <target state="new">Follows</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">84</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="278108a15a3fd1b41af09803735f2f77724da269" datatype="html">
+              <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Kijelentkezés</source>
+              <target state="new">Sign out</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/nav/nav.component.html</context>
+                <context context-type="linenumber">85</context>
+              </context-group>
+            </trans-unit>
+    </body>
+  </file>
+</xliff>

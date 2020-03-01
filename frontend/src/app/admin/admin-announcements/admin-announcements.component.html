@@ -1,0 +1,140 @@
+<ngx-ui-loader *ngIf="isLoading"></ngx-ui-loader>
+<app-announcements></app-announcements>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h5>Közlemények</h5>
+          <strong>Figyelem: közleményt csak szükség esetén érdemes kiírni, mert az oldal betöltését és megjelenését kedvezőtlenül befolyásolja.</strong>
+          <br>
+          <span>Megjegyzés: a módosítások csak elnavigálás / frissítés után láthatóak.</span>
+          <hr>
+          <div class="my-3">
+            <button class="btn btn-primary" role="button" (click)="lgModal.show()"><i class="fa fa-plus"></i> Új közlemény</button>
+          </div>
+          <div class="table-responsive">
+            <table datatable [dtOptions]="dtOptions" class="table table-striped table-hover" *ngIf="!this.isLoading">
+              <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Tárgy</th>
+                <th scope="col">Típus</th>
+                <th scope="col">Szerző</th>
+                <th scope="col">Bejegyzés dátuma</th>
+                <td></td>
+              </tr>
+              </thead>
+              <tbody>
+              <ng-container *ngFor="let announcement of announcements; index as i">
+                <tr>
+                  <th scope="row">{{announcement.id}}</th>
+                  <td>{{announcement.subject}}</td>
+                  <td>{{announcement.type}}</td>
+                  <td>{{announcement.userName}}</td>
+                  <td>{{announcement.createdAt | amDateFormat: 'YYYY. MM. DD. HH:mm' }}</td>
+                  <td class="text-right" style="white-space: nowrap;">
+                    <span class="fas fa-search mr-3" tooltip="Megtekintés" style="cursor: pointer;" (click)="openModal(announcementInfoModal, announcement)"></span>
+                    <span class="fas fa-pen mr-3" tooltip="Szerkesztés" style="cursor: pointer;" (click)="openModal(announcementEditModal, announcement)"></span>
+                    <span class="fas fa-times text-danger" tooltip="Törlés" style="cursor: pointer;" (click)="deleteAnnouncement(announcement, i)"></span>
+                  </td>
+                </tr>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1"
+     role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form #form="ngForm" (ngSubmit)="addAnnouncement(); form.reset()">
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">{{subject.value ? subject.value : 'Új közlemény'}}</h4>
+          <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Bezárás">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="subject">Tárgy</label>
+            <input #subject type="text" class="form-control" name="subject" id="subject" [(ngModel)]="model.subject">
+          </div>
+          <div class="form-group">
+            <label for="type">Típus</label>
+            <ngx-select #type id="type" [items]="items"></ngx-select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="lgModal.hide()">Mégsem</button>
+          <button type="submit" class="btn btn-primary mr-2" (click)="lgModal.hide()">Mentés</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<ng-template #announcementInfoModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Közlemény adatai - {{announcement.subject}}</h4>
+    <button type="button" class="close pull-right" aria-label="Bezárás" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label>ID</label>
+      <input type="text" class="form-control" [value]="announcement.id" disabled>
+    </div>
+    <div class="form-group">
+      <label>Tárgy</label>
+      <input type="text" class="form-control" [value]="announcement.subject" disabled>
+    </div>
+    <div class="form-group">
+      <label>Típus</label>
+      <ngx-select class="disabled" disabled="disabled" [placeholder]="announcement.type"></ngx-select>
+    </div>
+    <div class="form-group">
+      <label>Szerző</label>
+      <input type="text" class="form-control" [value]="announcement.userName" disabled>
+    </div>
+    <div class="form-group">
+      <label>Létrehozás dátuma</label>
+      <input type="text" class="form-control" [value]="announcement.createdAt | amLocale: 'hu' | amDateFormat: 'YYYY. MM. DD. HH:mm'" disabled>
+    </div>
+    <div class="modal-footer mt-4 pb-0">
+      <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Bezárás</button>
+    </div>
+  </div>
+</ng-template>
+<ng-template #announcementEditModal>
+  <form #form="ngForm" (ngSubmit)="updateAnnouncement()">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Közlemény szerkesztése - {{announcement.subject}}</h4>
+      <button type="button" class="close pull-right" aria-label="Bezárás" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>ID</label>
+        <input type="text" class="form-control" [value]="announcement.id" disabled>
+      </div>
+      <div class="form-group">
+        <label>Tárgy</label>
+        <input type="text" class="form-control" [value]="announcement.subject" [(ngModel)]="announcement.subject" name="subject">
+      </div>
+      <div class="form-group">
+        <label>Típus</label>
+        <ngx-select [items]="items" [(ngModel)]="announcement.type" name="type"></ngx-select>
+      </div>
+      <div class="modal-footer mt-4 pb-0">
+        <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Bezárás</button>
+        <button type="submit" class="btn btn-primary" (click)="modalRef.hide()">Mentés</button>
+      </div>
+    </div>
+  </form>
+</ng-template>

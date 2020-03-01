@@ -1,0 +1,268 @@
+<ngx-ui-loader *ngIf="isLoading"></ngx-ui-loader>
+<app-announcements *ngIf="!isLoading"></app-announcements>
+<div class="container">
+  <ng-container *ngIf="!isLoading">
+    <div class="container">
+      <div id="stats">
+        <div class="card border-light">
+          <app-player-header [player]="player"></app-player-header>
+          <div class="container container-fluid mb-2">
+            <div class="row">
+              <div class="col-md border-0">
+                <table class="table">
+                <span class="card-title font-weight-bold pl-4">
+                    Ládák
+                </span>
+                  <tbody>
+                  <tr>
+                    <td class="text-center pb-0" style="border-top: 0;">
+                      <div class="container">
+                        <div class="row">
+                          <ng-container *ngFor="let chest of playerChests">
+                            <div class="col-lg-1 col-3 chest-div" [ngSwitch]="chest.name">
+                              <span class="badge badge-pill badge-light float-right">+{{chest.index + 1}}</span>
+                              <ng-container *ngSwitchCase="'Silver Chest'">
+                                <img class="card-img-top" src="assets/chests/chest-silver.png" alt="">
+                              </ng-container>
+                              <ng-container *ngSwitchCase="'Golden Chest'">
+                                <img class="card-img-top" src="assets/chests/chest-golden.png" alt="">
+                              </ng-container>
+                              <ng-container *ngSwitchCase="'Giant Chest'">
+                                <img class="card-img-top" src="assets/chests/chest-giant.png" alt="">
+                              </ng-container>
+                              <ng-container *ngSwitchCase="'Magical Chest'">
+                                <img class="card-img-top" src="assets/chests/chest-magical.png" alt="">
+                              </ng-container>
+                              <ng-container *ngSwitchCase="'Epic Chest'">
+                                <img class="card-img-top" src="assets/chests/chest-epic.png" alt="">
+                              </ng-container>
+                              <ng-container *ngSwitchCase="'Legendary Chest'">
+                                <img class="card-img-top" src="assets/chests/chest-legendary.png" alt="">
+                              </ng-container>
+                              <ng-container *ngSwitchCase="'Mega Lightning Chest'">
+                                <img class="card-img-top" src="assets/chests/chest-megaLightning.png" alt="">
+                              </ng-container>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md border-0">
+              <table class="table">
+                <h5 class="card-title">
+                  <img class="ml-2 mr-1"
+                       src="assets/trophy.png">
+                  <strong>
+                    Játékos
+                    alapadatok
+                  </strong>
+                </h5>
+                <tbody>
+                <tr>
+                  <th>Név</th>
+                  <td class="text-right">{{player.name}}</td>
+                </tr>
+                <tr>
+                  <th>Azonosító</th>
+                  <td class="text-right">{{player.tag.substr(1)}}</td>
+                </tr>
+                <tr>
+                  <th>Kupaszám</th>
+                  <td class="text-right">{{player.trophies | number}}</td>
+                </tr>
+                <tr>
+                  <th>Aréna</th>
+                  <td class="text-right">{{player.arena.name}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md border-0">
+              <table class="table">
+                <h5 class="card-title">
+                  <img class="ml-2 mr-1"
+                       src="assets/clan-wars.png">
+                  <strong>
+                    Klán
+                    alapadatok
+                  </strong>
+                </h5>
+                <tbody>
+                <tr>
+                  <th>Név</th>
+                  <td class="text-right" *ngIf="player.hasOwnProperty('clan')">
+                    {{player.clan.name}}
+                  </td>
+                  <td class="text-right" *ngIf="!player.hasOwnProperty('clan')">
+                    N/A
+                  </td>
+                </tr>
+                <tr>
+                  <th>Azonosító</th>
+                  <td class="text-right" *ngIf="player.hasOwnProperty('clan')">
+                    {{player.clan.tag.substr(1)}}
+                  </td>
+                  <td class="text-right" *ngIf="!player.hasOwnProperty('clan')">
+                    N/A
+                  </td>
+                </tr>
+                <tr>
+                  <th>Játékos szerepköre</th>
+                  <td class="text-right" *ngIf="player.hasOwnProperty('clan')">
+                    <app-player-clan-role [playerClanRole]="player.role"></app-player-clan-role>
+                  </td>
+                  <td class="text-right" *ngIf="!player.hasOwnProperty('clan')">
+                    N/A
+                  </td>
+                </tr>
+                <tr>
+                  <th>Játékos donation a héten</th>
+                  <td class="text-right" *ngIf="player.hasOwnProperty('clan')">
+                    {{player.donations | number}}
+                  </td>
+                  <td class="text-right" *ngIf="!player.hasOwnProperty('clan')">
+                    N/A
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md border-0">
+              <table class="table">
+                <h5 class="card-title">
+                  <img class="ml-2 mr-1"
+                       src="assets/battle.png">
+                  <strong>
+                    Játékos
+                    statisztika
+                  </strong>
+                </h5>
+                <tbody>
+                <tr>
+                  <th>Győzelmek</th>
+                  <td class="text-right">{{player.wins | number}}</td>
+                </tr>
+                <tr>
+                  <th>Vereségek</th>
+                  <td class="text-right">{{player.losses | number}}</td>
+                </tr>
+                <tr>
+                  <th>War day győzelmek</th>
+                  <td class="text-right">{{player.warDayWins | number}}</td>
+                </tr>
+                <tr>
+                  <th>Szint</th>
+                  <td class="text-right">{{player.expLevel}}</td>
+                </tr>
+                <tr>
+                  <th>Összes donation</th>
+                  <td class="text-right">{{player.donations | number}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md border-0">
+              <table class="table">
+                <h5 class="card-title">
+                  <img class="ml-2 mr-1"
+                       src="assets/challenges.png">
+                  <strong>
+                    Játékos
+                    eredmények
+                  </strong>
+                </h5>
+                <tbody>
+                <tr>
+                  <th>Challenge max. győzelmek</th>
+                  <td class="text-right">{{player.challengeMaxWins | number}}</td>
+                </tr>
+                <tr>
+                  <th>Challenge gyűjtött kártyák</th>
+                  <td class="text-right">{{player.challengeCardsWon | number}}</td>
+                </tr>
+                <tr>
+                  <th>Tournament gyűjtött kártyák</th>
+                  <td class="text-right">{{player.tournamentCardsWon | number}}</td>
+                </tr>
+                <tr>
+                  <th>Toplista helyezés</th>
+                  <td class="text-right">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md border-0">
+              <table class="table">
+                <h5 class="card-title">
+                  <img class="ml-2 mr-1"
+                       src="assets/legendaryPoints.png">
+                  <strong>
+                    Játékos szezon
+                    eredmények
+                  </strong>
+                </h5>
+                <tbody>
+                <tr>
+                  <th>Jelenlegi szezon</th>
+                  <td class="text-right">
+                    {{player.leagueStatistics.currentSeason.trophies | number}}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Előző szezon</th>
+                  <td class="text-right">
+                    {{player.leagueStatistics.previousSeason?.trophies |number}}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Legjobb szezon</th>
+                  <td class="text-right">
+                    {{player.leagueStatistics.bestSeason?.trophies | number}}
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md border-0">
+            </div>
+          </div>
+          <div class="container container-fluid mb-2">
+            <div class="row px-3">
+              <div class="col-md border-0">
+                <table class="table">
+                <span class="card-title font-weight-bold pl-3">
+                    Pakli<a href="{{player.deckLink}}"> (import) </a>
+                </span>
+                  <p class="card-title pl-3">
+                    <a href="#">Összes használt pakli <span class="oi oi-arrow-right"></span></a>
+                  </p>
+                  <tbody>
+                  <tr>
+                    <td class="text-center px-0 pb-0" style="border-top: 0;">
+                      <div class="container">
+                        <app-player-deck [playerDeck]="player.currentDeck"></app-player-deck>
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

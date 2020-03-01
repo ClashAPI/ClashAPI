@@ -1,0 +1,11 @@
+<ng-container [ngSwitch]="clanType">
+  <ng-container *ngSwitchCase="'open'">
+    Nyílt
+  </ng-container>
+  <ng-container *ngSwitchCase="'invite only'">
+    Meghívásos
+  </ng-container>
+  <ng-container *ngSwitchCase="'closed'">
+    Zárt
+  </ng-container>
+</ng-container>

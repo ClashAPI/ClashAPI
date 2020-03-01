@@ -1,0 +1,71 @@
+.dropdown-toggle {
+  cursor: pointer;
+}
+
+.nav-link {
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: black;
+  padding: 10px 0px;
+  margin: 0px 15px;
+  display: inline-block;
+  position: relative;
+  opacity: 0.75;
+  transition-duration: 0.3s;
+}
+
+.nav-link:hover {
+  transition-duration: 0.3s;
+  opacity: 1;
+}
+
+.nav-link::before {
+  transition: 300ms;
+  height: 3px;
+  content: "";
+  position: absolute;
+  background-color: #2980b9;
+}
+
+.nav-link-ltr::before {
+  width: 0%;
+  bottom: 10px;
+}
+
+.nav-link-ltr:hover::before {
+  width: 85%;
+}
+
+.dropdown-item {
+  font-weight: bold;
+  transition: 300ms;
+  opacity: 0.75;
+}
+
+.dropdown-item:hover {
+  background-color: #3498db;
+  color: white !important;
+  transition: 300ms;
+}
+
+.sign-out:hover {
+  background-color: #c0392b !important;
+}
+
+.atlassian:hover {
+  background-color: #0052CC !important;
+}
+
+.discord:hover {
+  background-color: #7289DA;
+}
+
+.twitter:hover {
+  background-color: #1DA1F2;
+}
+
+.sentry:hover {
+  background-color: #6C5FC7;
+}

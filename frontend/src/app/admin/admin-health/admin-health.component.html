@@ -1,0 +1,100 @@
+<app-announcements></app-announcements>
+<div class="container">
+  <div class="row">
+    <div class="col-md-7">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5>ClashAPI Dashboard</h5>
+          <hr>
+          <div class="d-flex justify-content-center" *ngIf="isLoading">
+            <div class="spinner-grow" role="status">
+              <span class="sr-only">Betöltés...</span>
+            </div>
+          </div>
+          <ng-container *ngIf="!isLoading">
+            <h5>Szerver terheltség</h5>
+            <div class="mb-2">
+              <progressbar class="progress-striped active" style="height: 25px;" [value]="cpuUsage" [striped]="true" [animate]="true" [max]="100" [type]="getUsageHealth(cpuUsage)">CPU kihasználtság: {{cpuUsage}}%</progressbar>
+            </div>
+            <div class="mb-2">
+              <progressbar class="progress-striped active" style="height: 25px;" [value]="math.floor(ram - ramUsage)" [striped]="true"
+                           [animate]="true" [max]="math.floor(ram)" [type]="getUsageHealth((ram - ramUsage) / ram * 100)">
+                RAM kihasználtság: {{math.floor(ram - ramUsage)}} MB / {{math.floor(ram)}} MB ({{(ram - ramUsage) / ram * 100 | number: '1.0-0'}}%)
+              </progressbar>
+            </div>
+            <div class="mb-2 mt-4">
+              <button class="btn btn-sm btn-danger" type="button" (click)="runGc()"
+                      popover="A garbage collector kényszerített lefuttatásával memória szabadítható fel, azonban lefutásáig a backend API nem küld választ."
+                      popoverTitle="Kényszerített garbage collection"
+                      placement="left"
+                      triggers="mouseenter:mouseleave">
+                Kényszerített GC
+              </button>
+            </div>
+
+            <h5 class="mt-4">Felhasználók</h5>
+            <p>Regisztrált felhasználó száma: <strong>{{usersCount}}</strong></p>
+            <p>Ma regisztrált felhasználók száma: <strong>{{usersToday.length}}</strong></p>
+
+            <small class="text-muted text-">Legutóbb frissítve: <time>{{updateDate | amLocale: 'hu' | amTimeAgo}}</time></small>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5>Rendszerüzenetek</h5>
+          <hr>
+          <ng-container *ngIf="isLoading">
+            <div class="d-flex justify-content-center">
+              <div class="spinner-grow" role="status">
+                <span class="sr-only">Betöltés...</span>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!isLoading">
+            <ng-container *ngIf="systemMessages">
+              <!-- -->
+            </ng-container>
+            <ng-container *ngIf="!systemMessages">
+              <p>Nincs rendszerüzenet.</p>
+            </ng-container>
+            <small class="text-muted text-">Legutóbb frissítve: <time>{{updateDate | amLocale: 'hu' | amTimeAgo}}</time></small>
+          </ng-container>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h5>RoyaleAPI health</h5>
+          <hr>
+          <ng-container *ngIf="isLoading">
+            <div class="d-flex justify-content-center">
+              <div class="spinner-grow" role="status">
+                <span class="sr-only">Betöltés...</span>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!isLoading">
+            <p class="font-weight-bold mb-2">
+              RoyaleAPI API státusz:
+              <span class="text-success" *ngIf="health.connections.apiSource">Elérhető</span>
+              <span class="text-danger" *ngIf="!health.connections.apiSource">Nem elérhető</span>
+            </p>
+            <p class="mb-2">
+              RoyaleAPI adatbázis státusz:
+              <span class="text-success" *ngIf="health.connections.database">Elérhető</span>
+              <span class="text-danger" *ngIf="!health.connections.database">Nem elérhető</span>
+            </p>
+            <p class="mb-2">
+              RoyaleAPI gyorsítótár státusz:
+              <span class="text-success" *ngIf="health.connections.redis">Elérhető</span>
+              <span class="text-danger" *ngIf="!health.connections.redis">Nem elérhető</span>
+            </p>
+            <small class="text-muted text-">Legutóbb frissítve: <time>{{updateDate | amLocale: 'hu' | amTimeAgo}}</time></small>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

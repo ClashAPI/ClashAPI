@@ -1,0 +1,222 @@
+<ngx-ui-loader *ngIf="isLoading"></ngx-ui-loader>
+<app-announcements></app-announcements>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h5>Felhasználók</h5>
+          <hr>
+          <div class="my-3">
+            <button class="btn btn-primary" role="button" disabled><i class="fa fa-plus"></i> Új felhasználó</button>
+          </div>
+          <div class="table-responsive">
+            <table datatable [dtOptions]="dtOptions" class="table table-striped table-hover" *ngIf="!this.isLoading">
+              <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Felhasználónév</th>
+                <th scope="col">E-mail cím</th>
+                <th scope="col">Regisztráció dátuma</th>
+                <td></td>
+              </tr>
+              </thead>
+              <tbody>
+              <ng-container *ngFor="let user of users; index as i">
+                <tr>
+                  <th scope="row">{{user.id}}</th>
+                  <td>{{user.username}}</td>
+                  <td>{{user.email}}</td>
+                  <td>{{user.createdAt | amLocale: 'hu' | amTimeAgo}}</td>
+                  <td class="text-right" style="white-space: nowrap;">
+                    <span class="fas fa-search mr-3" tooltip="Megtekintés" style="cursor: pointer;" (click)="openModal(userInfoModal, user); getUserRoles(user.id)"></span>
+                    <span class="fas fa-pen mr-3" tooltip="Szerkesztés" style="cursor: pointer;" (click)="openModal(userEditModal, user); getUserRoles(user.id)"></span>
+                    <span class="fas fa-times text-danger" tooltip="Törlés" style="cursor: pointer;" (click)="deleteUser(user, i)"></span>
+                  </td>
+                </tr>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #userInfoModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Felhasználó adatai - {{user.username}}</h4>
+    <button type="button" class="close pull-right" aria-label="Bezárás" (click)="modalRef.hide(); onSelect('details')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-3">
+        <tabset [vertical]="true" type="pills">
+          <tab heading="Alapadatok" (selectTab)="onSelect('details')"></tab>
+          <tab heading="Jogosultságok" (selectTab)="onSelect('permissions')"></tab>
+          <tab heading="Clash Royale fiókok" (selectTab)="onSelect('accounts')"></tab>
+        </tabset>
+      </div>
+      <div class="col-md-9">
+        <ng-container *ngIf="selectedTab === 'details'">
+          <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" [value]="user.id" disabled>
+          </div>
+          <div class="form-group">
+            <label for="username">Felhasználónév</label>
+            <input type="text" class="form-control" [value]="user.username" disabled>
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail cím</label>
+            <input type="email" class="form-control" [value]="user.email" disabled>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="selectedTab === 'accounts'">
+          <div class="table-responsive">
+            <table datatable [dtOptions]="dtOptions" class="table table-striped table-hover" *ngIf="!this.isLoading">
+              <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Fiókazonosító</th>
+                <th scope="col">Megerősítve?</th>
+                <th scope="col">Hozzáadás dátuma</th>
+              </tr>
+              </thead>
+              <tbody>
+              <ng-container *ngFor="let account of user.crAccounts; index as i">
+                <tr>
+                  <th scope="row">{{account.id}}</th>
+                  <td><a [routerLink]="['/player/' + account.playerId]" (click)="modalRef.hide();">{{account.playerId}}</a></td>
+                  <td>
+                    <ng-container *ngIf="account.isVerified">
+                      <span class="fas fa-check text-success" tooltip="Megerősített" style="cursor: pointer;"></span>
+                    </ng-container>
+                    <ng-container *ngIf="!account.isVerified">
+                      <span class="fas fa-times text-danger" tooltip="Megerősítetlen" style="cursor: pointer;"></span>
+                    </ng-container>
+                  </td>
+                  <td>{{account.createdAt | date }}</td>
+                </tr>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="selectedTab === 'permissions'">
+          <div class="table-responsive">
+            <table datatable [dtOptions]="dtOptions" class="table table-striped table-hover" *ngIf="!this.isLoading">
+              <thead>
+              <tr>
+                <th scope="col">Csoport név</th>
+              </tr>
+              </thead>
+              <tbody>
+              <ng-container *ngFor="let role of userRoles; index as i">
+                <tr>
+                  <th scope="row">{{role}}</th>
+                </tr>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="modal-footer mt-4 pb-0">
+      <button type="button" class="btn btn-secondary" (click)="modalRef.hide(); onSelect('details')">Bezárás</button>
+    </div>
+  </div>
+</ng-template>
+<ng-template #userEditModal>
+  <form #form="ngForm" (ngSubmit)="updateUser()">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Felhasználó szerkesztése - {{user.username}}</h4>
+      <button type="button" class="close pull-right" aria-label="Bezárás" (click)="modalRef.hide(); onSelect('details')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-3">
+          <tabset [vertical]="true" type="pills">
+            <tab heading="Alapadatok" (selectTab)="onSelect('details')"></tab>
+            <tab heading="Jogosultságok" (selectTab)="onSelect('permissions')"></tab>
+            <tab heading="Clash Royale fiókok" (selectTab)="onSelect('accounts')"></tab>
+          </tabset>
+        </div>
+        <div class="col-md-9">
+          <ng-container *ngIf="selectedTab === 'details'">
+            <div class="form-group">
+              <label for="id">ID</label>
+              <input type="text" class="form-control" id="id" disabled [value]="user.id">
+            </div>
+            <div class="form-group">
+              <label for="username">Felhasználónév</label>
+              <input type="text" class="form-control" id="username" name="username" [value]="user.username" [(ngModel)]="user.username">
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail cím</label>
+              <input type="email" class="form-control" id="email" name="email" [value]="user.email" [(ngModel)]="user.email">
+            </div>
+          </ng-container>
+          <ng-container *ngIf="selectedTab === 'accounts'">
+            <div class="table-responsive">
+              <table datatable [dtOptions]="dtOptions" class="table table-striped table-hover" *ngIf="!this.isLoading">
+                <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Fiókazonosító</th>
+                  <th scope="col">Megerősítve?</th>
+                  <th scope="col">Hozzáadás dátuma</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *ngFor="let account of user.crAccounts; index as i">
+                  <tr>
+                    <th scope="row">{{account.id}}</th>
+                    <td><a [routerLink]="['/player/' + account.playerId]" (click)="modalRef.hide();">{{account.playerId}}</a></td>
+                    <td>
+                      <ng-container *ngIf="account.isVerified">
+                        <span class="fas fa-check text-success" tooltip="Megerősített" style="cursor: pointer;"></span>
+                      </ng-container>
+                      <ng-container *ngIf="!account.isVerified">
+                        <span class="fas fa-times text-danger" tooltip="Megerősítetlen" style="cursor: pointer;"></span>
+                      </ng-container>
+                    </td>
+                    <td>{{account.createdAt | date }}</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="selectedTab === 'permissions'">
+            <div class="table-responsive">
+              <table datatable [dtOptions]="dtOptions" class="table table-striped table-hover" *ngIf="!this.isLoading">
+                <thead>
+                <tr>
+                  <th scope="col">Csoport név</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *ngFor="let role of userRoles; index as i">
+                  <tr>
+                    <th scope="row">{{role}}</th>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="modal-footer mt-4 pb-0">
+        <button type="button" class="btn btn-secondary" (click)="modalRef.hide(); onSelect('details');">Bezárás</button>
+        <button type="submit" class="btn btn-primary" (click)="modalRef.hide();">Mentés</button>
+      </div>
+    </div>
+  </form>
+</ng-template>

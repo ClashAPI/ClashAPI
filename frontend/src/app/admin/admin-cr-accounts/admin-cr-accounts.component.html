@@ -1,0 +1,69 @@
+<ngx-ui-loader *ngIf="isLoading"></ngx-ui-loader>
+<app-announcements></app-announcements>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h5>Clash Royale fiókok</h5>
+          <hr>
+          <div class="my-3">
+            <button class="btn btn-primary" role="button" disabled><i class="fa fa-plus"></i> Új fiók</button>
+          </div>
+          <div class="table-responsive">
+            <table datatable [dtOptions]="dtOptions" class="table table-striped table-hover" *ngIf="!this.isLoading">
+              <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Fiókazonosító</th>
+                <th scope="col">Felhasználónév</th>
+                <th scope="col">Megerősítve?</th>
+                <td></td>
+              </tr>
+              </thead>
+              <tbody>
+              <ng-container *ngFor="let account of accounts; index as i">
+                <tr>
+                  <th scope="row">{{account.id}}</th>
+                  <td><a [routerLink]="['/player/' + account.playerId]">{{account.playerId}}</a></td>
+                  <td>{{account.userName}}</td>
+                  <td>
+                    <ng-container *ngIf="account.isVerified">
+                      <span class="fas fa-check text-success" tooltip="Megerősített" style="cursor: pointer;"></span>
+                    </ng-container>
+                    <ng-container *ngIf="!account.isVerified">
+                      <span class="fas fa-times text-danger" tooltip="Megerősítetlen" style="cursor: pointer;"></span>
+                    </ng-container>
+                  </td>
+                  <td class="text-right" style="white-space: nowrap;">
+                    <span class="fas fa-check mr-3 text-success" tooltip="Megerősítés" style="cursor: pointer;"
+                          *ngIf="!account.isVerified" (click)="openModal(verifyAccountModal, account)"></span>
+                    <span class="fas fa-times text-danger" tooltip="Törlés" style="cursor: pointer;" (click)="deleteAccount(account, i)"></span>
+                  </td>
+                </tr>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #verifyAccountModal>
+  <form #form="ngForm" (ngSubmit)="verifyAccount(account); form.reset()">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Játékfiók megerősítése</h4>
+      <button type="button" class="close pull-right" aria-label="Bezárás" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Biztosan szeretnéd megerősíteni a(z) {{account.playerId}} azonosítójú fiókot?
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Mégsem</button>
+      <button type="submit" class="btn btn-primary mr-2" (click)="modalRef.hide()">Megerősítés</button>
+    </div>
+  </form>
+</ng-template>

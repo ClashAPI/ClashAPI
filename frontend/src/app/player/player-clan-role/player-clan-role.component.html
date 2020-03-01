@@ -1,0 +1,14 @@
+<ng-container [ngSwitch]="playerClanRole">
+  <ng-container *ngSwitchCase="'member'" i18n="@@member">
+    Tag
+  </ng-container>
+  <ng-container *ngSwitchCase="'elder'" i18n="@@elder">
+    Rangidős tag
+  </ng-container>
+  <ng-container *ngSwitchCase="'coLeader'" i18n="@@coLeader">
+    Társvezető
+  </ng-container>
+  <ng-container *ngSwitchCase="'leader'" i18n="@@leader">
+    Vezető
+  </ng-container>
+</ng-container>

@@ -1,0 +1,7 @@
+<div class="container" *ngIf="announcements != null">
+  <ng-container *ngFor="let announcement of announcements">
+    <div class="alert" [class]="'alert-' + announcement.type" role="alert">
+      <span class="fa fa-bullhorn mr-2"></span><strong>{{announcement.subject}}</strong>
+    </div>
+  </ng-container>
+</div>

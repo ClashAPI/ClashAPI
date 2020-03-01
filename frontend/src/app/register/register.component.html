@@ -1,0 +1,58 @@
+<app-announcements></app-announcements>
+<div class="container">
+  <div class="row justify-content-center bg-white p-3">
+    <div class="col-md-8">
+      <div>
+        <h5 class="mb-3">Új fiók regisztrálása</h5>
+        <form #registerForm="ngForm" (ngSubmit)="register()">
+          <div class="form-group">
+            <input #username="ngModel" required type="text" class="form-control" id="username" name="username" placeholder="Felhasználónév" [(ngModel)]="model.username">
+            <span class="text-danger" *ngIf="username.touched && username.value.trim().value === 0">
+              A felhasználónév megadása kötelező
+            </span>
+          </div>
+          <div class="form-group">
+            <input required type="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                   id="email" name="email" placeholder="E-mail cím" #email="ngModel" [(ngModel)]="model.email">
+            <span class="text-danger" *ngIf="email.touched && email.value.trim().value === 0">
+              Az e-mail cím megadása kötelező
+            </span>
+            <span class="text-danger" *ngIf="email.touched && email.errors">
+              A megadott e-mail cím érvénytelen
+            </span>
+          </div>
+          <div class="form-group">
+            <input required type="password" #password="ngModel" class="form-control" id="password" name="password" placeholder="Jelszó" minlength="6" [(ngModel)]="model.password">
+            <span class="text-danger" *ngIf="password.touched && password.value.trim().value === 0">
+              A jelszó megadása kötelező
+            </span>
+            <span class="text-danger" *ngIf="password.touched && password.value.length < 6">
+              A jelszónak legalább 6 karakter hosszúságúnak kell lennie
+            </span>
+          </div>
+          <div class="form-group">
+            <input required type="password" #passwordConfirmation="ngModel" class="form-control"
+                   id="passwordConfirmation" name="passwordConfirmation" placeholder="Jelszó újra" [(ngModel)]="model.passwordConfirmation">
+            <span class="text-danger" *ngIf="passwordConfirmation.dirty && passwordConfirmation.value.trim().value < 1">
+              A jelszó megerősítése kötelező
+            </span>
+            <span class="text-danger" *ngIf="passwordConfirmation.touched && password.value != passwordConfirmation.value">
+              A két jelszó nem egyezik
+            </span>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <button class="btn btn-success btn-block" [disabled]="!registerForm.valid || password.value != passwordConfirmation.value" type="submit"><i class="fas fa-user-plus mr-2"></i> Regisztráció</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div>
+        <h5 class="text-right mb-3">Már van fiókod?</h5>
+        <button class="btn btn-primary btn-block" [routerLink]="['/login']"><i class="fas fa-sign-in-alt mr-2"></i> Bejelentkezés</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="card">
+  <div class="card-body py-3">
+    <p class="h5 font-weight-bold">Játékosok</p>
+    <ng-container *ngIf="!players[0]">
+      <span>Jelenleg nem követsz egyetlen játékost sem. Kezdésként tekintsd meg a <a href="#">profi játékosokat</a>.</span>
+    </ng-container>
+    <ng-container *ngIf="players[0]">
+      <table class="table">
+        <thead>
+        <th scope="col" style="border-top: none !important;"></th>
+        <th scope="col" style="border-top: none !important;"></th>
+        <th scope="col" style="border-top: none !important;"></th>
+        <th scope="col" style="border-top: none !important;"></th>
+        <th scope="col" style="border-top: none !important;"></th>
+        <th scope="col" style="border-top: none !important;"></th>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let player of players; index as i">
+          <tr id="{{player.playerTag}}">
+            <th scope="row" style="vertical-align: middle;">
+              <img src="assets/king-blue.png" style="width: 15%;">
+            </th>
+            <td style="vertical-align: middle;">
+              <a [routerLink]="['/player/' + player.playerTag]">{{player.playerName}}</a>
+            </td>
+            <td style="vertical-align: middle;">
+              <a [routerLink]="">
+                <img src="assets/cards.png">
+              </a>
+            </td>
+            <td style="vertical-align: middle;">
+              <a [routerLink]="['/player/' + player.playerTag + '/battles']">
+                <img src="assets/battle.png">
+              </a>
+            </td>
+            <td style="vertical-align: middle;">
+              {{player.playerTag}}
+            </td>
+            <td class="text-right" style="vertical-align: middle;">
+              <i class="far fa-times-circle" style="font-size: 30px; cursor: pointer;" (click)="unfollowPlayer(player.playerTag, i)"></i>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+    </ng-container>
+  </div>
+</div>

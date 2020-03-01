@@ -1,0 +1,36 @@
+<ngx-ui-loader *ngIf="isLoading"></ngx-ui-loader>
+<ng-container *ngIf="!isLoading">
+  <app-announcements></app-announcements>
+  <div class="container">
+
+    <p class="h5 font-weight-bold">Az Én ClashAPI-m</p>
+    <p>Mentsd el a kedvenc játékosaid, kártyáid és paklijaid.</p>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div>
+          <tabset>
+            <tab>
+              <ng-template tabHeading>
+                Játékosok <span class="badge badge-info ml-1">{{playerFollows.length}}</span>
+              </ng-template>
+              <app-favorite-players [players]="playerFollows"></app-favorite-players>
+            </tab>
+            <tab>
+              <ng-template tabHeading>
+                Klánok <span class="badge badge-info ml-1">{{clanFollows.length}}</span>
+              </ng-template>
+              <app-favorite-clans [clans]="clanFollows"></app-favorite-clans>
+            </tab>
+            <tab>
+              <ng-template tabHeading>
+                Paklik <span class="badge badge-info ml-1">{{deckFollows.length}}</span>
+              </ng-template>
+              <app-favorite-decks></app-favorite-decks>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

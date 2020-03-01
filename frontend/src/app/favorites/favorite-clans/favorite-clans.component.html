@@ -1,0 +1,50 @@
+<div class="card">
+  <div class="card-body py-3">
+    <p class="h5 font-weight-bold">Klánok</p>
+    <ng-container *ngIf="!clans[0]">
+      <span>Jelenleg nem követsz egyetlen klánt sem.</span>
+    </ng-container>
+    <ng-container *ngIf="clans[0]">
+      <table class="table">
+        <thead>
+          <th scope="col" style="border-top: none !important;"></th>
+          <th scope="col" style="border-top: none !important;"></th>
+          <th scope="col" style="border-top: none !important;"></th>
+          <th scope="col" style="border-top: none !important;"></th>
+          <th scope="col" style="border-top: none !important;"></th>
+          <th scope="col" style="border-top: none !important;"></th>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let clan of clans; index as i">
+          <tr id="{{clan.clanTag}}">
+            <th scope="row" style="vertical-align: middle;">
+              <img src="assets/king-blue.png" style="width: 15%;" />
+            </th>
+            <td style="vertical-align: middle;">
+              <a [routerLink]="['/clan/' + clan.clanTag]">
+                {{clan.clanName}}
+              </a>
+            </td>
+            <td style="vertical-align: middle;">
+              #{{clan.clanTag}}
+            </td>
+            <td style="vertical-align: middle;">
+              <a href="#">
+                Háború
+              </a>
+            </td>
+            <td style="vertical-align: middle;">
+              <a href="#">
+                Csaták
+              </a>
+            </td>
+            <td class="text-right" style="vertical-align: middle;">
+              <i class="far fa-times-circle" style="font-size: 30px; cursor: pointer;" (click)="unfollowClan(clan.clanTag, i)"></i>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+    </ng-container>
+  </div>
+</div>

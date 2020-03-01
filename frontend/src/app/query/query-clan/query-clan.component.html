@@ -1,0 +1,36 @@
+<app-announcements></app-announcements>
+<div class="container">
+  <div class="justify-content-center">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-3">
+            <h5>Lekérdezés</h5>
+            <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+              <a class="nav-link" [routerLink]="['/query/player']">Játékos</a>
+              <a class="nav-link active">Klán</a>
+              <a class="nav-link" [routerLink]="['/query/info']">Információ</a>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <h5>Klán lekérdezése</h5>
+            <form #form="ngForm" (ngSubmit)="getClan()">
+              <div class="form-group">
+                <input required type="text" class="form-control" id="tag" name="tag" placeholder="Klán azonosítója"
+                       minlength="6" maxlength="8" pattern="[0289CcGgJjLlPpQqRrUuVvYy]*" [(ngModel)]="model.tag" (ngModelChange)="model.tag = $event.toUpperCase()">
+              </div>
+              <div class="row">
+                <div class="col-md-8">
+                  <button class="btn btn-success btn-block" [disabled]="!form.valid" type="submit"><i class="fas fa-check mr-2"></i> Küldés</button>
+                </div>
+                <div class="col-md-4">
+                  <button class="btn btn-info btn-block" type="button" [routerLink]="['/query/info']"><i class="fas fa-question mr-2"></i> Segítség</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

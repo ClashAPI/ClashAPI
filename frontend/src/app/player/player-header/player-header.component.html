@@ -1,0 +1,69 @@
+<div class="card-body bg-white" style="padding-bottom: 0 !important">
+  <app-player-arena [player]="player"></app-player-arena>
+  <h5 class="card-title ml-3">
+    <strong>{{player.name}}</strong> <span> ({{player.expLevel}})</span>
+
+    <a class="pl-2" *ngIf="loggedIn()">
+      <ng-container *ngIf="isFollowing === false">
+        <span class="far fa-heart" style="font-size: 85%; color: #e74c3c;"
+              aria-hidden="true" tooltip="Játékos követése" (click)="followPlayer()">
+            </span>
+      </ng-container>
+      <ng-container *ngIf="isFollowing === true">
+        <span class="fas fa-heart" style="font-size: 85%; color: #e74c3c;"
+              aria-hidden="true" tooltip="Játékos követésének leállítása" (click)="unfollowPlayer()">
+            </span>
+      </ng-container>
+    </a>
+    <a class="pl-2" href="https://link.clashroyale.com/?playerInfo?id={{player.tag.substr(1)}}"
+       data-toggle="popover" data-placement="top" data-content="Megnyitás a Clash Royaleban"
+       data-trigger="hover">
+            <span class="fa fa-external-link-alt" style="font-size: 85%"
+                  aria-hidden="true" tooltip="Megnyitás a Clash Royaleban">
+            </span>
+    </a>
+  </h5>
+  <section class="card-title ml-3">{{player.tag}}</section>
+  <section class="card-title ml-3">
+    {{player.trophies | number }} /
+    {{player.bestTrophies | number}} PB <img src="assets/trophy.png"
+                                                  style="width: 38px;" class="px-2"> |
+    <span class="pl-1">{{player.arena?.name}}</span>
+  </section>
+  <p class="card-text ml-3 mb-2">
+    <app-player-clan-badge [player]="player"></app-player-clan-badge>
+    <ng-container *ngIf="player.clan != null">
+      <a [routerLink]="['/clan/' + player.clan.tag.substr(1)]">| {{player.clan.name}}</a>
+      |
+      {{player.clan.tag.substr(1)}} |
+      <app-player-clan-role [playerClanRole]="player.role"></app-player-clan-role>
+    </ng-container>
+    <ng-container *ngIf="player.clan == null">
+      | Nincs klánban
+    </ng-container>
+    <!-- Jelvények -->
+    <ng-container *ngIf="player.challengeMaxWins === 20">
+      <span class="p-2 ml-2 badge text-white" style="background-color: #f2711c;">20 győzelem</span>
+    </ng-container>
+    <ng-container *ngIf="badges != null">
+      <ng-container *ngIf="badges.includes('verified') && !badges.includes('staff')">
+        <span class="p-2 ml-2 badge text-white" style="background-color: #2ecc71;">Ellenőrzött</span>
+      </ng-container>
+      <ng-container *ngIf="badges.includes('staff')">
+        <span class="p-2 ml-2 badge text-white" style="background-color: #00c09a;">Staff</span>
+      </ng-container>
+    </ng-container>
+  </p>
+
+    <nav class="nav border my-4" style="background-color: #f5f5f5; border-color: #d4d4d5;">
+      <a class="nav-link btn btn-outline-light text-dark" [routerLink]="['/player/' + player.tag.substr(1)]" routerLinkActive="active">
+        <span class="fa fa-home"></span>
+      </a>
+      <a class="nav-link btn btn-outline-light text-dark" [routerLink]="['/player/' + player.tag.substr(1) + '/battles']" routerLinkActive="active">Csaták</a>
+      <a class="nav-link btn btn-outline-light disabled">Paklik</a>
+      <a class="nav-link btn btn-outline-light text-dark d-none d-sm-block">Kártyák</a>
+      <a class="nav-link btn btn-outline-light d-block d-sm-none"><span class="fas fa-layer-group"></span></a>
+      <a class="nav-link btn btn-outline-light disabled d-none d-sm-block">Analitika</a>
+      <a class="nav-link btn btn-outline-light disabled d-block d-sm-none"><span class="fas fa-chart-pie"></span></a>
+    </nav>
+</div>

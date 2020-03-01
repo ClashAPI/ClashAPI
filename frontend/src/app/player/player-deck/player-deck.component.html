@@ -1,0 +1,136 @@
+<div class="row">
+  <ng-container *ngFor="let card of playerDeck; index as i">
+    <ng-container *ngIf="i == 4">
+      <div class="w-100 d-md-none pb-2"></div>
+    </ng-container>
+    <div class="col">
+      <img class="card-img-top" src="{{card.iconUrls.medium}}">
+      <ng-container id="info">
+        <section class="py-1">
+          <ng-container [ngSwitch]="card.maxLevel">
+            <ng-container *ngSwitchCase="13">
+              Level {{card.level}}
+
+              <div class="progress mx-1" style="height: 7px;" *ngIf="!card.hasOwnProperty('starLevel')">
+                <progressbar type="{{isReadyForUpgrade(card.level, card.count, 'common') ? 'success' : '' || card.level === 13 ? 'danger' : ''}}"
+                             [value]="card.level != 13 ? card.count : 1"
+                             [max]="card.level != 13 ? getMaxCardCountForLevel(card.level, 'common') : 1">
+                </progressbar>
+              </div>
+
+              <ng-container *ngIf="card.hasOwnProperty('starLevel')">
+                <br>
+                <ng-container *ngFor="let star of [].constructor(card.starLevel)">
+                  <img class="card-img-top ml-1"
+                       src="assets/starLevel.png" style="width: 17%;">
+                </ng-container>
+              </ng-container>
+
+              <section class="pt-2">
+                <span *ngIf="card.level != 13">
+                  {{card.count | number}} /
+                  <ng-container [ngSwitch]="card.level">
+                    {{getMaxCardCountForLevel(card.level, 'common') | number}}
+                  </ng-container>
+                </span>
+                <span *ngIf="card.level === 13">
+                  MAX
+                </span>
+              </section>
+            </ng-container>
+            <ng-container *ngSwitchCase="11">
+              Level {{card.level + 2}}
+
+              <div class="progress mx-1" style="height: 7px;" *ngIf="!card.hasOwnProperty('starLevel')">
+                <progressbar type="{{isReadyForUpgrade(card.level, card.count, 'rare') ? 'success' : '' || card.level === 11 ? 'danger' : ''}}"
+                             [value]="card.level != 11 ? card.count : 1"
+                             [max]="card.level != 11 ? getMaxCardCountForLevel(card.level, 'rare') : 1">
+                </progressbar>
+              </div>
+
+              <ng-container *ngIf="card.hasOwnProperty('starLevel')">
+                <br>
+                <ng-container *ngFor="let star of [].constructor(card.starLevel)">
+                  <img class="card-img-top ml-1"
+                       src="assets/starLevel.png" style="width: 17%;">
+                </ng-container>
+              </ng-container>
+
+              <section class="pt-2">
+                <span *ngIf="card.level != 11">
+                  {{card.count | number}} /
+                  <ng-container [ngSwitch]="card.level">
+                    {{getMaxCardCountForLevel(card.level, 'rare') | number}}
+                  </ng-container>
+                </span>
+                <span *ngIf="card.level === 11">
+                  MAX
+                </span>
+              </section>
+            </ng-container>
+            <ng-container *ngSwitchCase="8">
+              Level {{card.level + 5}}
+
+              <div class="progress mx-1" style="height: 7px;" *ngIf="!card.hasOwnProperty('starLevel')">
+                <progressbar type="{{isReadyForUpgrade(card.level, card.count, 'epic') ? 'success' : '' || card.level === 8 ? 'danger' : ''}}"
+                             [value]="card.level != 8 ? card.count : 1"
+                             [max]="card.level != 8 ? getMaxCardCountForLevel(card.level, 'epic') : 1">
+                </progressbar>
+              </div>
+
+              <ng-container *ngIf="card.hasOwnProperty('starLevel')">
+                <br>
+                <ng-container *ngFor="let star of [].constructor(card.starLevel)">
+                  <img class="card-img-top ml-1"
+                       src="assets/starLevel.png" style="width: 17%;">
+                </ng-container>
+              </ng-container>
+
+              <section class="pt-2">
+                <span *ngIf="card.level != 8">
+                  {{card.count | number}} /
+                  <ng-container [ngSwitch]="card.level">
+                    {{getMaxCardCountForLevel(card.level, 'epic') | number}}
+                  </ng-container>
+                </span>
+                <span *ngIf="card.level === 8">
+                  MAX
+                </span>
+              </section>
+            </ng-container>
+            <ng-container *ngSwitchCase="5">
+              Level {{card.level + 8}}
+
+              <div class="progress mx-1" style="height: 7px;" *ngIf="!card.hasOwnProperty('starLevel')">
+                <progressbar type="{{isReadyForUpgrade(card.level, card.count, 'legendary') ? 'success' : '' || card.level === 5 ? 'danger' : ''}}"
+                             [value]="card.level != 5 ? card.count : 1"
+                             [max]="card.level != 5 ? getMaxCardCountForLevel(card.level, 'legendary') : 1">
+                </progressbar>
+              </div>
+
+              <ng-container *ngIf="card.hasOwnProperty('starLevel')">
+                <br>
+                <ng-container *ngFor="let star of [].constructor(card.starLevel)">
+                  <img class="card-img-top ml-1"
+                       src="assets/starLevel.png" style="width: 17%;">
+                </ng-container>
+              </ng-container>
+
+              <section class="pt-2">
+                <span *ngIf="card.level != 5">
+                  {{card.count | number}} /
+                  <ng-container [ngSwitch]="card.level">
+                    {{getMaxCardCountForLevel(card.level, 'legendary') | number}}
+                  </ng-container>
+                </span>
+                <span *ngIf="card.level === 5">
+                  MAX
+                </span>
+              </section>
+            </ng-container>
+          </ng-container>
+        </section>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

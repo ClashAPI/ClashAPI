@@ -1,0 +1,42 @@
+<app-announcements></app-announcements>
+<div class="container">
+  <div class="justify-content-center">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-3">
+            <h5>Lekérdezés</h5>
+            <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+              <a class="nav-link" [routerLink]="['/query/player']">Játékos</a>
+              <a class="nav-link" [routerLink]="['/query/clan']">Klán</a>
+              <a class="nav-link active">Információ</a>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <h5>Adatok lekérése a játékszerverről</h5>
+            <p>Az adatok a Clash Royale hivatalos API szerveréről történnek lekérdezésre.</p>
+            <p>Az API válaszai a játékosok adatai esetében 51 másodpercre gyorsítótárazásra kerülnek, míg a klánok adatai 47 másodpercre kerülnek
+              gyorsítótárazásra (ezek az idők megegyeznek az API gyorsítótárazásával) a felesleges lekérések elkerülése, illetve a gyorsabb
+              oldalletöltés érdekében.</p>
+
+            <hr>
+
+            <h5>Játékos adatainak lekérése</h5>
+            <ul>
+              <li>A játékos azonosítója 0289CGJLlPQRUVY karaktereket tartalmazhat, és 8 illetve 9 karakter közti hosszúságú lehet.</li>
+              <li>Az azonoítót # előtag nélkül kell megadni</li>
+            </ul>
+
+            <hr>
+
+            <h5>Klán adatainak lekérése</h5>
+            <ul>
+              <li>A klán azonosítója 0289CGJLPQRUVY karaktereket tartalmazhat, és 6 illetve 8 karakter közti hosszúságú lehet.</li>
+              <li>Az azonoítót # előtag nélkül kell megadni</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

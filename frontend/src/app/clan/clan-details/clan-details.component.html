@@ -1,0 +1,118 @@
+<ngx-ui-loader *ngIf="isLoading"></ngx-ui-loader>
+<app-announcements></app-announcements>
+<div class="container">
+  <ng-container *ngIf="!isLoading">
+    <div class="container card border-light">
+      <div class="py-3 px-4">
+        <div class="card-title container container-fluid border-0">
+          <app-clan-badge [clan]="clan"></app-clan-badge>
+          <section>
+            <strong class="h2 pr-3">{{clan.name}}</strong>
+
+            <a *ngIf="loggedIn()">
+              <ng-container *ngIf="!isFollowing">
+                <span class="far fa-heart mr-2" style="font-size: 140%; color: #e74c3c;"
+                      aria-hidden="true" tooltip="Klán követése" (click)="followClan()">
+                </span>
+              </ng-container>
+              <ng-container *ngIf="isFollowing">
+                <span class="fas fa-heart mr-2" style="font-size: 140%; color: #e74c3c;"
+                      aria-hidden="true" tooltip="Klán követésének leállítása" (click)="unfollowClan()">
+                </span>
+              </ng-container>
+            </a>
+
+            <a href="https://link.clashroyale.com/?clanInfo?id={{clan.tag.substr(1)}}" class="pl-2"
+               data-toggle="popover" data-placement="top" data-content="Megnyitás a Clash Royaleban"
+               data-trigger="hover">
+              <span class="fa fa-external-link-alt" style="font-size: 140%" tooltip="Megnyitás a Clash Royaleban"></span>
+            </a>
+          </section>
+          <br>
+          <section>
+            {{clan.tag.substr(1)}}
+            <img class="px-2" src="assets/trophy.png" style="width: 38px;">
+            {{clan.clanScore | number}}
+            <img class="px-2" style="width: 38px;" src="assets/cw-trophy.png">
+            {{clan.clanWarTrophies | number}}
+          </section>
+          <nav class="nav border my-4" style="background-color: white; border-color: #d4d4d5;">
+            <a class="nav-link active btn btn-outline-light" href="#">Infó</a>
+            <a class="nav-link btn btn-outline-light disabled" href="#">Háború</a>
+            <a class="nav-link btn btn-outline-light disabled" href="#">Csaták</a>
+            <a class="nav-link btn btn-outline-light disabled" href="#">Statisztikák</a>
+            <a class="nav-link btn btn-outline-light disabled" href="#">Történet</a>
+          </nav>
+          <section class="pb-5">
+            {{clan.description}}
+          </section>
+          <div class="row pb-3">
+            <div class="col">
+              <strong>Klán pontszáma</strong><br>
+              {{clan.clanScore | number}}
+            </div>
+            <div class="col">
+              <strong>Jelentkezéshez szükséges kupaszám</strong><br>
+              {{clan.requiredTrophies | number}}
+            </div>
+            <div class="col">
+              <strong>Donation a héten</strong><br>
+              {{clan.donationsPerWeek | number}}
+            </div>
+          </div>
+          <div class="row pb-3">
+            <div class="col">
+              <strong>Tagok</strong><br>
+              {{clan.members}} / 50
+            </div>
+            <div class="col">
+              <strong>Régió</strong><br>
+              {{clan.location.name}}
+            </div>
+            <div class="col">
+              <strong>Típus</strong><br>
+              <app-clan-type clanType="{{clan.type}}"></app-clan-type>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table datatable [dtOptions]="dtOptions" class="table table-sm table-hover table-striped container container-fluid p-0 m-0" id="clanTable">
+            <thead class="table-bordered">
+            <tr>
+              <th scope="col">Hely</th>
+              <th scope="col">Játékosnév</th>
+              <th scope="col">Szerepkör</th>
+              <th scope="col">Kupaszám</th>
+              <th scope="col">Szint</th>
+              <th scope="col">Adott kártya</th>
+              <th scope="col">Kapott kártya</th>
+            </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let member of clan.memberList; index as i">
+                  <tr>
+                    <th class="align-middle" scope="row">{{i + 1}}</th>
+                    <td class="align-middle">
+                      <a [routerLink]="['/player/' + member.tag.substr(1)]">
+                        {{member.name}}
+                      </a><br>
+                      <time>{{member.lastSeen | amLocale: 'hu' | amTimeAgo}}</time>
+                    </td>
+                    <td class="align-middle">
+                      <app-player-clan-role [playerClanRole]="member.role"></app-player-clan-role>
+                    </td>
+                    <td class="align-middle">
+                      {{member.trophies | number}}
+                    </td>
+                    <td class="align-middle text-right">{{member.expLevel}}</td>
+                    <td class="align-middle text-right">{{member.donations | number}}</td>
+                    <td class="align-middle text-right">{{member.donationsReceived | number}}</td>
+                  </tr>
+                </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
