@@ -15,8 +15,8 @@
               Lekérdezés
             </a>
             <div class="dropdown-menu" *dropdownMenu>
-              <a class="dropdown-item" [routerLink]="['/query/player']" i18n><i class="fa fa-gamepad mr-2"></i> Játékos</a>
-              <a class="dropdown-item" [routerLink]="['/query/clan']" i18n><i class="fa fa-shield-alt mr-2"></i> Klán</a>
+              <a class="dropdown-item" [routerLink]="['/query/player']" (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-gamepad mr-2"></i> Játékos</a>
+              <a class="dropdown-item" [routerLink]="['/query/clan']" (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-shield-alt mr-2"></i> Klán</a>
             </div>
           </li>
           <li class="nav-item dropdown" dropdown>
@@ -24,8 +24,8 @@
               Toplista
             </a>
             <div class="dropdown-menu" *dropdownMenu>
-              <a class="dropdown-item" i18n><i class="fa fa-gamepad mr-2"></i> Játékosok</a>
-              <a class="dropdown-item" i18n><i class="fa fa-shield-alt mr-2"></i> Klánok</a>
+              <a class="dropdown-item" (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-gamepad mr-2"></i> Játékosok</a>
+              <a class="dropdown-item" (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-shield-alt mr-2"></i> Klánok</a>
             </div>
           </li>
           <li class="nav-item dropdown" dropdown>
@@ -34,9 +34,9 @@
             </a>
             <div class="dropdown-menu" *dropdownMenu>
               <a class="dropdown-item discord" target="_blank" rel="noopener noreferrer"
-                 href="https://discord.gg/YNjbj36"><i class="fab fa-discord mr-2"></i> Discord</a>
+                 href="https://discord.gg/YNjbj36" (click)="isCollapsed = !isCollapsed"><i class="fab fa-discord mr-2"></i> Discord</a>
               <a class="dropdown-item twitter" target="_blank" rel="noopener noreferrer"
-                 href="https://twitter.com/ClashAPI"><i class="fab fa-twitter mr-2"></i> Twitter</a>
+                 href="https://twitter.com/ClashAPI" (click)="isCollapsed = !isCollapsed"><i class="fab fa-twitter mr-2"></i> Twitter</a>
             </div>
           </li>
           <li class="nav-item dropdown" dropdown>
@@ -45,13 +45,13 @@
             </a>
             <div class="dropdown-menu" *dropdownMenu>
               <a class="dropdown-item atlassian" target="_blank" rel="noopener noreferrer"
-                 href="https://clashapi.atlassian.net/" i18n><i class="fab fa-atlassian mr-2"></i> Atlassian Cloud</a>
+                 href="https://clashapi.atlassian.net/" (click)="isCollapsed = !isCollapsed" i18n><i class="fab fa-atlassian mr-2"></i> Atlassian Cloud</a>
               <a class="dropdown-item sentry" target="_blank" rel="noopener noreferrer"
-                 href="https://sentry.io/organizations/clashapi" i18n><i class="fa fa-bug mr-2"></i> Sentry SaaS</a>
+                 href="https://sentry.io/organizations/clashapi" (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-bug mr-2"></i> Sentry SaaS</a>
               <a class="dropdown-item" target="_blank" rel="noopener noreferrer"
-                 href="https://github.com/ClashAPI/ClashAPI" i18n><i class="fab fa-github mr-2"></i> GitHub Repo</a>
+                 href="https://github.com/ClashAPI/ClashAPI" (click)="isCollapsed = !isCollapsed" i18n><i class="fab fa-github mr-2"></i> GitHub Repo</a>
               <a class="dropdown-item" target="_blank" rel="noopener noreferrer"
-                 href="https://www.goraczroland.dev" i18n><i class="fa fa-blog mr-2"></i> Fejlesztői blog</a>
+                 href="https://www.goraczroland.dev" (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-blog mr-2"></i> Fejlesztői blog</a>
             </div>
           </li>
           <li class="nav-item d-none d-xl-block">
@@ -73,11 +73,11 @@
               Admin
             </a>
             <div class="dropdown-menu" *dropdownMenu>
-              <a class="dropdown-item disabled" disabled [routerLink]="['/admin']" i18n><i class="fa fa-sitemap mr-2"></i> Irányítópult</a>
-              <a class="dropdown-item" [routerLink]="['/admin/announcements']" i18n><i class="fa fa-bullhorn mr-2"></i> Közlemények</a>
-              <a class="dropdown-item" [routerLink]="['/admin/posts']" i18n><i class="fa fa-copy mr-2"></i> Cikkek</a>
-              <a class="dropdown-item" [routerLink]="['/admin/users']" i18n><i class="fa fa-users mr-2"></i> Felhasználók</a>
-              <a class="dropdown-item" [routerLink]="['/admin/accounts']" i18n><i class="fa fa-id-card-alt mr-2"></i> CR fiókok</a>
+              <a class="dropdown-item disabled" disabled [routerLink]="['/admin']" (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-sitemap mr-2"></i> Irányítópult</a>
+              <a class="dropdown-item" [routerLink]="['/admin/announcements']" (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-bullhorn mr-2"></i> Közlemények</a>
+              <a class="dropdown-item" [routerLink]="['/admin/posts']" (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-copy mr-2"></i> Cikkek</a>
+              <a class="dropdown-item" [routerLink]="['/admin/users']" (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-users mr-2"></i> Felhasználók</a>
+              <a class="dropdown-item" [routerLink]="['/admin/accounts']" (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-id-card-alt mr-2"></i> CR fiókok</a>
             </div>
           </li>
           <li class="nav-item dropdown" dropdown *ngIf="loggedIn()">
@@ -88,9 +88,9 @@
               </ng-container>
             </a>
             <div class="dropdown-menu" *dropdownMenu>
-              <a class="dropdown-item" [routerLink]="['/profile']" i18n><i class="fa fa-user mr-2"></i> Profil</a>
-              <a class="dropdown-item" [routerLink]="['/accounts']" i18n><i class="fa fa-trophy mr-2"></i> CR profil</a>
-              <a class="dropdown-item" [routerLink]="['/follows']" i18n><i class="fa fa-heart mr-2"></i> Követések</a>
+              <a class="dropdown-item" [routerLink]="['/profile']" (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-user mr-2"></i> Profil</a>
+              <a class="dropdown-item" [routerLink]="['/accounts']" (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-trophy mr-2"></i> CR profil</a>
+              <a class="dropdown-item" [routerLink]="['/follows']" (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-heart mr-2"></i> Követések</a>
               <a class="dropdown-item sign-out" (click)="logout()" style="cursor: pointer;" i18n><i class="fa fa-sign-out-alt mr-2"></i> Kijelentkezés</a>
             </div>
           </li>
