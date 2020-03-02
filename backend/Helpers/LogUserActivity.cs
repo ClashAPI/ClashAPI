@@ -14,10 +14,10 @@ namespace backend.Helpers
             var resultContent = await next();
             var userId = int.Parse(resultContent.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
             var repo = resultContent.HttpContext.RequestServices.GetService<IRepository>();
-            var user = await repo.GetUser(userId);
+            var user = await repo.GetUserAsync(userId);
             user.LastActive = DateTime.Now;
 
-            await repo.SaveAll();
+            await repo.SaveAllAsync();
         }
     }
 }

@@ -17,12 +17,14 @@ namespace backend.Controllers
     public class FollowsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IRepository _repository;
         private readonly UserManager<User> _userManager;
 
-        public FollowsController(UserManager<User> userManager, ApplicationDbContext context)
+        public FollowsController(UserManager<User> userManager, ApplicationDbContext context, IRepository repository)
         {
             _userManager = userManager;
             _context = context;
+            _repository = repository;
         }
 
         public async Task<IActionResult> Index()
@@ -49,8 +51,8 @@ namespace backend.Controllers
                     return BadRequest();
 
                 var follow = user.PlayerFollows.FirstOrDefault(f => f.PlayerTag == playerUnfollowDto.Id);
-                _context.Remove(follow);
-                await _context.SaveChangesAsync();
+                _repository.Delete(follow);
+                await _repository.SaveAllAsync();
             }
             catch (Exception e)
             {
@@ -70,8 +72,8 @@ namespace backend.Controllers
                 if (user.ClanFollows.FirstOrDefault(f => f.ClanTag == clanUnfollowDto.Id) == null) return BadRequest();
 
                 var follow = user.ClanFollows.FirstOrDefault(f => f.ClanTag == clanUnfollowDto.Id);
-                _context.Remove(follow);
-                await _context.SaveChangesAsync();
+                _repository.Delete(follow);
+                await _repository.SaveAllAsync();
             }
             catch (Exception e)
             {

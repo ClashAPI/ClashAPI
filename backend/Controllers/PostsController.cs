@@ -18,13 +18,15 @@ namespace backend.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IRepository _repository;
         private readonly UserManager<User> _userManager;
 
-        public PostsController(ApplicationDbContext context, UserManager<User> userManager, IMapper mapper)
+        public PostsController(ApplicationDbContext context, UserManager<User> userManager, IMapper mapper, IRepository repository)
         {
             _context = context;
             _userManager = userManager;
             _mapper = mapper;
+            _repository = repository;
         }
 
         [AllowAnonymous]
@@ -66,8 +68,8 @@ namespace backend.Controllers
             try
             {
                 var post = await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
-                _context.Remove(post);
-                await _context.SaveChangesAsync();
+                _repository.Delete(post);
+                await _repository.SaveAllAsync();
 
                 return Ok();
             }
@@ -89,7 +91,7 @@ namespace backend.Controllers
                 post.IsVisible = updatePostDto.IsVisible;
                 post.UpdatedAt = DateTime.Now;
 
-                await _context.SaveChangesAsync();
+                await _repository.SaveAllAsync();
 
                 return Ok();
             }
@@ -110,8 +112,8 @@ namespace backend.Controllers
 
                 var post = _mapper.Map<Post>(createPostDto);
 
-                var result = await _context.AddAsync(post);
-                await _context.SaveChangesAsync();
+                var result = await _repository.AddAsync(post);
+                await _repository.SaveAllAsync();
 
                 return Ok(new {id = result.Entity.Id, userName = result.Entity.Author.UserName,
                     title = result.Entity.Title, content = result.Entity.Content, createdAt = result.Entity.CreatedAt});

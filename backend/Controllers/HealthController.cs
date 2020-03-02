@@ -18,24 +18,11 @@ namespace backend.Controllers
     [AllowAnonymous]
     public class HealthController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IRepository _repository;
 
-        private readonly CrApiDetails _crApiDetails;
-
-        public HealthController(ApplicationDbContext _context, IOptions<CrApiDetails> crApiDetails)
+        public HealthController(IRepository repository)
         {
-            this._context = _context;
-            this._crApiDetails = crApiDetails.Value;
-        }
-
-        private string Query(string url)
-        {
-            var client = new RestClient(url);
-            var request = new RestRequest(Method.GET);
-            request.AddHeader("auth", _crApiDetails.ApiKey);
-            var response = client.Execute(request).Content;
-
-            return response;
+            _repository = repository;
         }
 
         // No longer works after March 1, 2020
@@ -68,10 +55,11 @@ namespace backend.Controllers
         [HttpGet("users")]
         public async Task<IActionResult> GetUserCount()
         {
-            var users = await _context.Users.CountAsync();
-            var usersRegisteredToday = await _context.Users.Where(u => u.CreatedAt.Date == DateTime.Today).ToListAsync();
+            var users = await _repository.GetUsersAsync();
+            var userCount = users.Count();
+            var usersRegisteredToday = _repository.GetUsersRegisteredTodayAsync();
 
-            return Ok(new { usersRegisteredToday, users});
+            return Ok(new { usersRegisteredToday, userCount});
         }
 
         [Authorize(Roles = "Fejlesztő")]

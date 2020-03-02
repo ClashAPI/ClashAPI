@@ -75,6 +75,7 @@ namespace backend
                 options.UseSqlServer(Configuration.GetConnectionString("LinuxConnection"));
             });
             services.AddScoped<IRepository, Repository>();
+            services.AddScoped<IGameDataService, GameDataService>();
             services.AddMvc(options =>
             {
                 options.EnableEndpointRouting = false;

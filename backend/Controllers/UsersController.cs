@@ -24,13 +24,13 @@ namespace backend.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
-        private readonly IRepository _repo;
+        private readonly IRepository _repository;
         private readonly UserManager<User> _userManager;
 
-        public UsersController(IRepository repo, IMapper mapper, ApplicationDbContext context,
+        public UsersController(IRepository repository, IMapper mapper, ApplicationDbContext context,
             UserManager<User> userManager)
         {
-            _repo = repo;
+            _repository = repository;
             _mapper = mapper;
             _context = context;
             _userManager = userManager;
@@ -39,7 +39,7 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await _repo.GetUsers();
+            var users = await _repository.GetUsersAsync();
             var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
 
             return Ok(usersToReturn);
@@ -48,7 +48,7 @@ namespace backend.Controllers
         [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
-            var user = await _repo.GetUser(id);
+            var user = await _repository.GetUserAsync(id);
             var userToReturn = _mapper.Map<UserForListDto>(user);
 
             return Ok(userToReturn);
@@ -61,10 +61,10 @@ namespace backend.Controllers
 
             try
             {
-                var userFromRepo = await _repo.GetUser(id);
+                var userFromRepo = await _repository.GetUserAsync(id);
                 _mapper.Map(userForUpdateDto, userFromRepo);
 
-                if (await _repo.SaveAll()) return NoContent();
+                if (await _repository.SaveAllAsync()) return NoContent();
             }
             catch (Exception e)
             {
@@ -78,7 +78,7 @@ namespace backend.Controllers
         [HttpGet("{id}/accounts")]
         public async Task<IActionResult> GetAccounts(int id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _repository.GetUserAsync(id);
 
             return Ok(await _context.CrAccounts.Where(a => a.User == user).ToListAsync());
         }
@@ -100,13 +100,9 @@ namespace backend.Controllers
                     return BadRequest();
                 }
 
-                var account =
-                    await _context.CrAccounts.FirstOrDefaultAsync(a =>
-                        a.PlayerId == playerId && a.IsVerified);
+                if (await _repository.GetIfCrAccountExistsAsync(playerId)) return BadRequest(new {exists = true});
 
-                if (account != null) return BadRequest(new {exists = true});
-
-                var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+                var user = await _repository.GetUserAsync(id);
                 var crAccount = new CrAccount
                 {
                     PlayerId = playerId,
@@ -114,8 +110,8 @@ namespace backend.Controllers
                     User = user
                 };
 
-                await _context.CrAccounts.AddAsync(crAccount);
-                await _context.SaveChangesAsync();
+                _repository.AddAsync(crAccount);
+                await _repository.SaveAllAsync();
 
                 return Ok(await _context.CrAccounts.FirstOrDefaultAsync(a =>
                     a.PlayerId == playerId && a.User == user));
@@ -131,13 +127,13 @@ namespace backend.Controllers
         {
             try
             {
-                var crAccount = await _context.CrAccounts.FirstOrDefaultAsync(a => a.PlayerId == playerId && a.User.Id == id);
+                var crAccount = await _repository.GetCrAccountAsync(id, playerId);
                 var user = await _userManager.GetUserAsync(User);
 
                 if (!await _userManager.IsInRoleAsync(user, "Fejlesztő") && crAccount.User.Id != user.Id) return Forbid();
 
-                _context.Remove(crAccount);
-                await _context.SaveChangesAsync();
+                _repository.Delete(crAccount);
+                await _repository.SaveAllAsync();
 
                 return Ok();
             }
@@ -153,12 +149,12 @@ namespace backend.Controllers
         {
             try
             {
-                var crAccount = await _context.CrAccounts.FirstOrDefaultAsync(a => a.PlayerId == playerId && a.User.Id == id);
+                var crAccount = await _repository.GetCrAccountAsync(id, playerId);
                 var user = await _userManager.GetUserAsync(User);
 
                 if (!await _userManager.IsInRoleAsync(user, "Fejlesztő") && crAccount.User.Id != user.Id) return Forbid();
 
-                var relatedCrAccounts = await _context.CrAccounts.Where(a => a.PlayerId == playerId && a.IsVerified).ToListAsync();
+                var relatedCrAccounts = await _repository.GetCrAccountsAsync(playerId);
                 
                 if (!relatedCrAccounts.IsNullOrEmpty())
                 {
@@ -166,7 +162,7 @@ namespace backend.Controllers
                 }
                 
                 crAccount.IsVerified = true;
-                await _context.SaveChangesAsync();
+                await _repository.SaveAllAsync();
                 
                 return Ok();
             }
@@ -179,7 +175,7 @@ namespace backend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _repository.GetUserAsync(id);
             var currentUser = await _userManager.GetUserAsync(User);
 
             if (user.Id == currentUser.Id)
@@ -187,8 +183,8 @@ namespace backend.Controllers
                 return BadRequest();
             }
 
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
+            _repository.Delete(user);
+            await _repository.SaveAllAsync();
 
             return Ok();
         }
@@ -196,7 +192,7 @@ namespace backend.Controllers
         [HttpGet("{id}/roles")]
         public async Task<IActionResult> GetUserRoles(int id)
         {
-            return Ok(await _userManager.GetRolesAsync(await _context.Users.FirstOrDefaultAsync(u => u.Id == id)));
+            return Ok(await _userManager.GetRolesAsync(await _repository.GetUserAsync(id)));
         }
     }
 }

@@ -21,11 +21,13 @@ namespace backend.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly IRepository _repository;
 
-        public AnnouncementsController(ApplicationDbContext context, UserManager<User> userManager)
+        public AnnouncementsController(ApplicationDbContext context, UserManager<User> userManager, IRepository repository)
         {
             _context = context;
             _userManager = userManager;
+            _repository = repository;
         }
 
         // GET: api/Announcements
@@ -75,7 +77,7 @@ namespace backend.Controllers
             
             try
             {
-                var announcement = await _context.Announcements.FirstOrDefaultAsync(a => a.Id == id);
+                var announcement = await _repository.GetAnnouncementAsync(id);
                 announcement.Subject = createAnnouncementDto.Subject;
                 announcement.Type = createAnnouncementDto.Type;
 
@@ -83,7 +85,7 @@ namespace backend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AnnouncementExists(id))
+                if (!await _repository.GetIfAnnouncementExistsAsync(id))
                 {
                     return NotFound();
                 }
@@ -122,8 +124,8 @@ namespace backend.Controllers
                 Type = createAnnouncementDto.Type,
                 Author = await _userManager.GetUserAsync(User)
             };
-            await _context.Announcements.AddAsync(announcement);
-            await _context.SaveChangesAsync();
+            await _repository.AddAsync(announcement);
+            await _repository.SaveAllAsync();
 
             return Ok(new {announcement.Id, userName = announcement.Author.UserName, announcement.Subject, announcement.Type, announcement.CreatedAt});
         }
@@ -132,21 +134,16 @@ namespace backend.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Announcement>> DeleteAnnouncement(Guid id)
         {
-            var announcement = await _context.Announcements.FindAsync(id);
+            var announcement = _repository.GetAnnouncementAsync(id);
             if (announcement == null)
             {
                 return NotFound();
             }
 
-            _context.Announcements.Remove(announcement);
-            await _context.SaveChangesAsync();
+            _repository.Delete(announcement);
+            await _repository.SaveAllAsync();
 
             return Ok();
-        }
-
-        private bool AnnouncementExists(Guid id)
-        {
-            return _context.Announcements.Any(e => e.Id == id);
         }
     }
 }
