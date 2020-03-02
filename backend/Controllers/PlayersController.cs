@@ -44,7 +44,7 @@ namespace backend.Controllers
         [HttpGet("{id}/followage")]
         public async Task<IActionResult> GetIsFollowingPlayer(string id)
         {
-            return Ok(_repository.GetIsFollowingPlayerAsync(id, User));
+            return Ok(await _repository.GetIsFollowingPlayerAsync(id, User));
         }
 
         [ResponseCache(Duration = 51)]
