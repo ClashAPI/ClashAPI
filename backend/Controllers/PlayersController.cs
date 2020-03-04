@@ -66,5 +66,11 @@ namespace backend.Controllers
         {
             return Ok(await _repository.GetBadgesAsync(id));
         }
+
+        [HttpGet("leaderboard")]
+        public async Task<IActionResult> GetPlayerLeaderboard([FromQuery] int? limit)
+        {
+            return Ok(_gameDataService.GetPlayerLeaderboard(limit));
+        }
     }
 }

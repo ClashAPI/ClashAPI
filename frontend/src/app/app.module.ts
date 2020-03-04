@@ -57,6 +57,7 @@ import {AdminCrAccountsComponent} from './admin/admin-cr-accounts/admin-cr-accou
 import {AdminAnnouncementsComponent} from './admin/admin-announcements/admin-announcements.component';
 import {AnnouncementsComponent} from './announcements/announcements.component';
 import {NgxSelectModule} from 'ngx-select-ex';
+import {PlayerLeaderboardComponent} from "./player/player-leaderboard/player-leaderboard.component";
 
 
 Sentry.init({
@@ -107,6 +108,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         PlayerClanRoleComponent,
         PlayerClanBadgeComponent,
         PlayerHeaderComponent,
+        PlayerLeaderboardComponent,
         ClanDetailsComponent,
         ClanTypeComponent,
         ClanBadgeComponent,

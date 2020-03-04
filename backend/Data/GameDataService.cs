@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Pekka.ClashRoyaleApi.Client.Clients;
 using Pekka.ClashRoyaleApi.Client.Contracts;
 using Pekka.ClashRoyaleApi.Client.Models.ClanModels;
+using Pekka.ClashRoyaleApi.Client.Models.LocationModels;
 using Pekka.ClashRoyaleApi.Client.Models.PlayerModels;
 using Pekka.Core;
 using Pekka.Core.Contracts;
@@ -112,6 +113,16 @@ namespace backend.Data
             var clanClient = buildServiceProvider.GetRequiredService<IClanClient>();
 
             return await clanClient.GetClanAsync("#" + clanTag);
+        }
+
+        public object GetPlayerLeaderboard(int? limit = null)
+        {
+            if (limit != null)
+            {
+                return JsonConvert.DeserializeObject(Query("https://proxy.royaleapi.dev/v1/locations/global/rankings/players" + "?limit=" + limit));
+            }
+            
+            return JsonConvert.DeserializeObject(Query("https://proxy.royaleapi.dev/v1/locations/global/rankings/players"));
         }
     }
 }

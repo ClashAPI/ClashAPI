@@ -3,8 +3,9 @@
 <div class="container">
   <ng-container *ngIf="!isLoading">
     <div class="container card border-light">
-      <div class="py-3 px-4">
+
         <div class="card-title container container-fluid border-0">
+          <div class="py-3 px-4">
           <app-clan-badge [clan]="clan"></app-clan-badge>
           <section>
             <strong class="h2 pr-3">{{clan.name}}</strong>
@@ -36,13 +37,17 @@
             <img class="px-2" style="width: 38px;" src="assets/cw-trophy.png">
             {{clan.clanWarTrophies | number}}
           </section>
-          <nav class="nav border my-4" style="background-color: white; border-color: #d4d4d5;">
-            <a class="nav-link active btn btn-outline-light" href="#">Infó</a>
-            <a class="nav-link btn btn-outline-light disabled" href="#">Háború</a>
-            <a class="nav-link btn btn-outline-light disabled" href="#">Csaták</a>
-            <a class="nav-link btn btn-outline-light disabled" href="#">Statisztikák</a>
-            <a class="nav-link btn btn-outline-light disabled" href="#">Történet</a>
+        </div>
+          <nav class="nav border mb-3" style="background-color: white; border-color: #d4d4d5;">
+            <a class="nav-link active btn btn-sm btn-outline-light" href="#">Infó</a>
+            <a class="nav-link btn btn-sm btn-outline-light disabled" href="#">Háború</a>
+            <a class="nav-link btn btn-sm btn-outline-light disabled" href="#">Csaták</a>
+            <a class="nav-link btn btn-sm btn-outline-light disabled d-none d-sm-block" href="#">Statisztikák</a>
+            <a class="nav-link btn btn-sm btn-outline-light disabled d-block d-sm-none"><span class="far fa-chart-bar"></span></a>
+            <a class="nav-link btn btn-sm btn-outline-light disabled d-none d-sm-block" href="#">Történet</a>
+            <a class="nav-link btn btn-sm btn-outline-light disabled d-block d-sm-none"><span class="fas fa-history"></span></a>
           </nav>
+          <div class="py-3 px-4">
           <section class="pb-5">
             {{clan.description}}
           </section>

@@ -1,0 +1,67 @@
+<ngx-ui-loader *ngIf="isLoading"></ngx-ui-loader>
+<div class="container">
+  <div class="card">
+    <table class="table">
+      <thead hidden>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Klánikon</th>
+        <th scope="col">Név / Klánnév</th>
+        <th scope="col">Paklik</th>
+        <th scope="col">Csaták</th>
+        <th scope="col">Változás</th>
+        <th scope="col">Szint</th>
+        <th scope="col">Kupaszám</th>
+      </tr>
+      </thead>
+      <tbody class="text-center">
+      <ng-container *ngFor="let player of players; index as i">
+      <tr>
+      <th scope="row" style="vertical-align: middle;">{{i + 1}}</th>
+      <td style="vertical-align: middle;">
+        <ng-container *ngIf="player.hasOwnProperty('clan')">
+          <app-player-clan-badge [player]="player"></app-player-clan-badge>
+        </ng-container>
+        <ng-container *ngIf="!player.hasOwnProperty('clan')">
+          <img class="mr-2" src="assets/clan-badges/no_clan.png" height="40" width="35">
+        </ng-container>
+        </td>
+      <td style="vertical-align: middle;">
+        <a [routerLink]="['/player/' + player.tag.substr(1)]">{{player.name}}</a><br>
+          <ng-container *ngIf="player.hasOwnProperty('clan')">
+            <a [routerLink]="['/clan/' + player.clan.tag.substr(1)]">{{player.clan.name}}</a>
+          </ng-container>
+          <ng-container *ngIf="!player.hasOwnProperty('clan')">
+            Nincs klánban
+          </ng-container>
+        </td>
+        <td style="vertical-align: middle;"><a href="#"><img class="mr-2" src="assets/cards.png"></a></td>
+        <td style="vertical-align: middle;">
+        <a [routerLink]="['player/' + player.tag + '/battles']">
+                                <img class="mr-2" src="assets/battle.png">
+                            </a>
+                        </td>
+                        <td style="vertical-align: middle;">
+                          <ng-container *ngIf="player.hasOwnProperty('previousRank') && player.hasOwnProperty('rank')">
+                            <ng-container *ngIf="player.previousRank - player.rank > 0">
+                              <span class="fas fa-arrow-up text-success align-left"></span>
+                            </ng-container>
+                            <ng-container *ngIf="player.previousRank - player.rank < 0">
+                              <span class="fas fa-arrow-down text-danger align-left"></span>
+                            </ng-container>
+                          </ng-container>
+                          <ng-container *ngIf="player.hasOwnProperty('previousRank') && player.hasOwnProperty('rank')">
+                            <span class="align-right">
+                            {{MathAbs(player.previousRank - player.rank)}}
+                            </span>
+                          </ng-container>
+  </td>
+  <td style="vertical-align: middle;">{{player.expLevel}}</td>
+  <td style="vertical-align: middle;">{{player.trophies}}</td>
+</tr>
+
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>

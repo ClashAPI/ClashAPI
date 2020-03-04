@@ -17,6 +17,7 @@ import {AdminPostsComponent} from './admin/admin-posts/admin-posts.component';
 import {UserCrAccountsComponent} from './user/user-cr-accounts/user-cr-accounts.component';
 import {AdminCrAccountsComponent} from './admin/admin-cr-accounts/admin-cr-accounts.component';
 import {AdminAnnouncementsComponent} from './admin/admin-announcements/admin-announcements.component';
+import {PlayerLeaderboardComponent} from './player/player-leaderboard/player-leaderboard.component';
 
 export const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,6 +26,7 @@ export const appRoutes: Routes = [
   { path: 'query/clan', component: QueryClanComponent },
   { path: 'player/:id', component: PlayerDetailsComponent },
   { path: 'player/:id/battles', component: PlayerBattlesComponent },
+  { path: 'leaderboard/players', component: PlayerLeaderboardComponent },
   { path: 'clan/:id', component: ClanDetailsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

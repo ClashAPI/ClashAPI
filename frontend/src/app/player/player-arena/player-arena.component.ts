@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class PlayerArenaComponent implements OnInit {
   @Input() player: any;
+  baseUrl = 'http://localhost:4200/';
 
   constructor() { }
 

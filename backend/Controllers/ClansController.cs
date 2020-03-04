@@ -22,9 +22,9 @@ namespace backend.Controllers
     public class ClansController : ControllerBase
     {
         private readonly IRepository _repository;
-        private readonly GameDataService _gameDataService;
+        private readonly IGameDataService _gameDataService;
 
-        public ClansController(IRepository repository, GameDataService gameDataService)
+        public ClansController(IRepository repository, IGameDataService gameDataService)
         {
             _repository = repository;
             _gameDataService = gameDataService;

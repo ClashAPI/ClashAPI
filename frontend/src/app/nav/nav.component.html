@@ -24,8 +24,8 @@
               Toplista
             </a>
             <div class="dropdown-menu" *dropdownMenu>
-              <a class="dropdown-item" (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-gamepad mr-2"></i> Játékosok</a>
-              <a class="dropdown-item" (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-shield-alt mr-2"></i> Klánok</a>
+              <a class="dropdown-item" [routerLink]="['leaderboard/players']" (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-gamepad mr-2"></i> Játékosok</a>
+              <a class="dropdown-item disabled" disabled (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-shield-alt mr-2"></i> Klánok</a>
             </div>
           </li>
           <li class="nav-item dropdown" dropdown>
@@ -55,18 +55,18 @@
             </div>
           </li>
           <li class="nav-item d-none d-xl-block">
-            <a class="nav-link nav-link-ltr" href="https://clashapi.atlassian.net/servicedesk/customer/portal/2" i18n>Segítség</a>
+            <a class="nav-link nav-link-ltr" href="https://clashapi.atlassian.net/servicedesk/customer/portal/2" (click)="isCollapsed ? isCollapsed = false : isCollapsed" i18n>Segítség</a>
           </li>
           <li class="nav-item sponsors d-none d-xl-block">
-            <a class="nav-link nav-link-ltr" href="https://www.goraczroland.dev/web/site/tamogatok" i18n>Szponzorok</a>
+            <a class="nav-link nav-link-ltr" href="https://www.goraczroland.dev/web/site/tamogatok" (click)="isCollapsed ? isCollapsed = false : isCollapsed" i18n>Szponzorok</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item" *ngIf="!loggedIn()">
-            <a class="nav-link nav-link-ltr" [routerLink]="['/register']" routerLinkActive="active" i18n>Regisztráció</a>
+            <a class="nav-link nav-link-ltr" [routerLink]="['/register']" routerLinkActive="active" (click)="isCollapsed ? isCollapsed = false : isCollapsed" i18n>Regisztráció</a>
           </li>
           <li class="nav-item" *ngIf="!loggedIn()">
-            <a class="nav-link nav-link-ltr" [routerLink]="['/login']" routerLinkActive="active" i18n>Bejelentkezés</a>
+            <a class="nav-link nav-link-ltr" [routerLink]="['/login']" routerLinkActive="active" (click)="isCollapsed ? isCollapsed = false : isCollapsed" i18n>Bejelentkezés</a>
           </li>
           <li class="nav-item dropdown" dropdown *ngIf="loggedIn()">
             <a class="nav-link nav-link-ltr dropdown-toggle text-primary" dropdownToggle *appHasRole="['Fejlesztő']">
