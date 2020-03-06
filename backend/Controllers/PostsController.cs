@@ -61,7 +61,7 @@ namespace backend.Controllers
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = "Fejlesztő")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePost(int id)
         {
@@ -79,7 +79,7 @@ namespace backend.Controllers
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = "Fejlesztő")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePost(int id, UpdatePostDto updatePostDto)
         {
@@ -101,7 +101,7 @@ namespace backend.Controllers
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = "Fejlesztő")]
         [HttpPost("")]
         public async Task<IActionResult> AddPost(CreatePostDto createPostDto)
         {

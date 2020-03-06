@@ -14,7 +14,7 @@ import {PlayerChestsComponent} from './player/player-chests/player-chests.compon
 import {PlayerDeckComponent} from './player/player-deck/player-deck.component';
 import {ProgressbarModule} from 'ngx-bootstrap/progressbar';
 import {FooterComponent} from './footer/footer.component';
-import {DatePipe} from '@angular/common';
+import {DatePipe, HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {PlayerClanRoleComponent} from './player/player-clan-role/player-clan-role.component';
 import {DataTablesModule} from 'angular-datatables';
 import {ClanDetailsComponent} from './clan/clan-details/clan-details.component';
@@ -160,7 +160,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     AuthService,
     DatePipe,
     ErrorInterceptor,
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true  }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true  },
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
 })

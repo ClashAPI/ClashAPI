@@ -110,7 +110,7 @@ namespace backend.Controllers
                     User = user
                 };
 
-                _repository.AddAsync(crAccount);
+                await _repository.AddAsync(crAccount);
                 await _repository.SaveAllAsync();
 
                 return Ok(await _context.CrAccounts.FirstOrDefaultAsync(a =>

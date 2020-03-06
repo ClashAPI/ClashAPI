@@ -37,6 +37,7 @@ namespace backend.Controllers
             return Ok(await _gameDataService.GetClanAsync(id));
         }
 
+        [Authorize]
         [HttpGet("{id}/followage")]
         public async Task<IActionResult> GetIsFollowingClan(string id)
         {
