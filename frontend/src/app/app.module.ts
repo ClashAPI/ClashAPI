@@ -57,7 +57,7 @@ import {AdminCrAccountsComponent} from './admin/admin-cr-accounts/admin-cr-accou
 import {AdminAnnouncementsComponent} from './admin/admin-announcements/admin-announcements.component';
 import {AnnouncementsComponent} from './announcements/announcements.component';
 import {NgxSelectModule} from 'ngx-select-ex';
-import {PlayerLeaderboardComponent} from "./player/player-leaderboard/player-leaderboard.component";
+import {PlayerLeaderboardComponent} from './player/player-leaderboard/player-leaderboard.component';
 
 
 Sentry.init({
@@ -129,7 +129,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         FavoriteDecksComponent,
     ],
     imports: [
-        RouterModule.forRoot(appRoutes),
+        RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),
         BrowserModule.withServerTransition({appId: 'serverApp'}),
         BrowserAnimationsModule,
         HttpClientModule,
@@ -160,8 +160,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     AuthService,
     DatePipe,
     ErrorInterceptor,
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true  },
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true  }
   ],
   bootstrap: [AppComponent]
 })

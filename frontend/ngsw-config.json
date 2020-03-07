@@ -25,19 +25,6 @@
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
       }
-    },
-    {
-      "name": "assets",
-      "installMode": "lazy",
-      "updateMode": "prefetch",
-      "resources": {
-        "files": [
-          "/assets/**"
-        ],
-        "urls": [
-          "https://api-assets.clashroyale.com/**"
-        ]
-      }
     }
   ]
 }

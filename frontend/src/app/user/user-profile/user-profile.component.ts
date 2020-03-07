@@ -29,6 +29,7 @@ export class UserProfileComponent implements OnInit {
 
   getUser() {
     this.isLoading = true;
+    this.ngxService.start();
     this.http.get(this.baseUrl + 'users/' + this.authService.decodedToken.nameid)
       .pipe(finalize(() => {
         this.isLoading = false;
@@ -38,8 +39,6 @@ export class UserProfileComponent implements OnInit {
       this.user = data;
       this.currentUserName = this.authService.decodedToken.unique_name;
       this.currentEmail = this.authService.decodedToken.email;
-      console.log(this.currentUserName);
-      console.log(this.currentEmail);
     }, (error) => {
       this.noty.error('Hiba történt az adataid lekérése során');
       console.log(error);
