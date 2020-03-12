@@ -16,6 +16,10 @@ export class PlayerDetailsComponent implements OnInit {
   isLoading: boolean;
   player: any = {};
   playerChests: any = {};
+  challenge12Wins: any;
+  grandChallenge12Wins: any;
+  draws: any;
+  cardsCount: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private noty: NotyService,
               private router: Router, private spinner: NgxUiLoaderService) { }
@@ -34,6 +38,13 @@ export class PlayerDetailsComponent implements OnInit {
       this.noty.error('A játékos ládáinak lekérése sikertelen');
       this.router.navigate(['/']);
     });
+    this.http.get(this.baseUrl + 'cards').subscribe((data) => {
+      // @ts-ignore
+      this.cardsCount = data.items.length;
+    }, (error) => {
+      this.noty.error('A kártyák lekérése sikertelen');
+      this.router.navigate(['/']);
+    });
     this.http.get(this.baseUrl + 'players/' + id)
       .pipe(finalize(() => {
         this.isLoading = false;
@@ -42,6 +53,9 @@ export class PlayerDetailsComponent implements OnInit {
       .subscribe((data) => {
       // @ts-ignore
       this.player = data;
+      this.challenge12Wins = this.player.badges.find(o => o.name === 'Classic12Wins') ? this.player.badges.find(o => o.name === 'Classic12Wins').progress : 0;
+      this.grandChallenge12Wins = this.player.badges.find(o => o.name === 'Grand12Wins') ? this.player.badges.find(o => o.name === 'Grand12Wins').progress : 0;
+      this.draws = this.player.battleCount - (this.player.wins + this.player.losses);
     }, (error) => {
       this.noty.error('A játékos adatainak lekérése sikertelen');
       console.log(error);

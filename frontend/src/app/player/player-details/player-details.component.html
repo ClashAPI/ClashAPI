@@ -4,18 +4,18 @@
   <ng-container *ngIf="!isLoading">
     <div class="container">
       <div id="stats">
-        <div class="card border-light">
+        <div class="card border-light border">
           <app-player-header [player]="player"></app-player-header>
-          <div class="container container-fluid mb-2">
+          <div class="container container-fluid mb-2 border-bottom">
             <div class="row">
               <div class="col-md border-0">
                 <table class="table">
-                <span class="card-title font-weight-bold pl-4">
+                <span class="card-title font-weight-bold pl-3">
                     Ládák
                 </span>
                   <tbody>
                   <tr>
-                    <td class="text-center pb-0" style="border-top: 0;">
+                    <td class="text-center pb-0 px-4" style="border-top: 0;">
                       <div class="container">
                         <div class="row">
                           <ng-container *ngFor="let chest of playerChests">
@@ -53,199 +53,355 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md border-0">
+          <div class="row px-3">
+            <div class="col-md border-right border-sm-right-none">
               <table class="table">
-                <h5 class="card-title">
-                  <img class="ml-2 mr-1"
-                       src="assets/trophy.png">
-                  <strong>
-                    Játékos
-                    alapadatok
-                  </strong>
-                </h5>
-                <tbody>
+                <tbody class="small">
                 <tr>
-                  <th>Név</th>
-                  <td class="text-right">{{player.name}}</td>
+                  <th style="border-top: none;">
+                    <h6 class="card-title">
+                      <strong>
+                        Szezon statisztikák
+                      </strong>
+                    </h6>
+                  </th>
+                  <td style="border-top: none;">
+                    <img class="float-right"
+                         src="assets/legendaryPoints.png">
+                  </td>
                 </tr>
                 <tr>
-                  <th>Azonosító</th>
-                  <td class="text-right">{{player.tag.substr(1)}}</td>
+                  <th class="text-uppercase font-weight-bold" style="border-top: none;">Legjobb szezon</th>
+                  <td class="text-right" style="border-top: none;"></td>
+                </tr>
+                <tr>
+                  <th>
+                    <p class="mb-0">
+                      <app-player-arena [trophies]="player.leagueStatistics.bestSeason.trophies" [class]="'float-left mr-2'" [width]="'8%'"></app-player-arena>
+                      <span class="font-weight-bold"><app-player-arena-name [trophies]="player.leagueStatistics.bestSeason.trophies"></app-player-arena-name></span>
+                      <br>
+                      <span><app-player-arena-name [trophies]="player.leagueStatistics.bestSeason.trophies"></app-player-arena-name></span>
+                    </p>
+                  </th>
+                  <td class="text-right"></td>
+                </tr>
+                <tr>
+                  <th>Rangsor helyezés</th>
+                  <td class="text-right">
+                    <ng-container *ngIf="player.leagueStatistics.bestSeason.hasOwnProperty('rank')">
+                      {{player.leagueStatistics.bestSeason.rank}}
+                    </ng-container>
+                    <ng-container *ngIf="!player.leagueStatistics.bestSeason.hasOwnProperty('rank')">
+                      Nincs
+                    </ng-container>
+                  </td>
                 </tr>
                 <tr>
                   <th>Kupaszám</th>
-                  <td class="text-right">{{player.trophies | number}}</td>
+                  <td class="text-right">{{player.leagueStatistics.bestSeason.trophies | number}}</td>
                 </tr>
                 <tr>
-                  <th>Aréna</th>
-                  <td class="text-right">{{player.arena.name}}</td>
+                  <th>Dátum</th>
+                  <td class="text-right">{{player.leagueStatistics.bestSeason.id}}</td>
                 </tr>
+                <tr>
+                  <th class="text-uppercase font-weight-bold">Jelenlegi szezon</th>
+                  <td class="text-right"></td>
+                </tr>
+                <tr>
+                  <th>
+                    <p class="mb-0">
+                      <app-player-arena [trophies]="player.leagueStatistics.currentSeason.trophies" [class]="'float-left mr-2'" [width]="'8%'"></app-player-arena>
+                      <span class="font-weight-bold"><app-player-arena-name [trophies]="player.leagueStatistics.currentSeason.trophies"></app-player-arena-name></span>
+                      <br>
+                      <span><app-player-arena-name [trophies]="player.leagueStatistics.currentSeason.trophies"></app-player-arena-name></span>
+                    </p>
+                  </th>
+                  <td class="text-right"></td>
+                </tr>
+                <tr>
+                  <th>Rangsor helyezés</th>
+                  <td class="text-right">
+                    <ng-container *ngIf="player.leagueStatistics.currentSeason.hasOwnProperty('rank')">
+                      {{player.leagueStatistics.bestSeason.rank}}
+                    </ng-container>
+                    <ng-container *ngIf="!player.leagueStatistics.currentSeason.hasOwnProperty('rank')">
+                      Nincs
+                    </ng-container>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Kupaszám</th>
+                  <td class="text-right">{{player.leagueStatistics.currentSeason.trophies | number}}</td>
+                </tr>
+                <tr>
+                  <th>Legmagasabb kupaszám</th>
+                  <td class="text-right">
+                    <ng-container *ngIf="player.leagueStatistics.currentSeason.hasOwnProperty('bestTrophies')">
+                      {{player.leagueStatistics.currentSeason.bestTrophies | number}}
+                    </ng-container>
+                    <ng-container *ngIf="!player.leagueStatistics.currentSeason.hasOwnProperty('bestTrophies')">
+                      0
+                    </ng-container>
+                  </td>
+                </tr>
+                <ng-container *ngIf="player.leagueStatistics.hasOwnProperty('previousSeason')">
+                  <tr>
+                    <th class="text-uppercase font-weight-bold">Előző szezon</th>
+                    <td class="text-right"></td>
+                  </tr>
+                  <tr>
+                    <th>
+                      <p class="mb-0">
+                        <app-player-arena [trophies]="player.leagueStatistics.previousSeason.trophies" [class]="'float-left mr-2'" [width]="'8%'"></app-player-arena>
+                        <span class="font-weight-bold"><app-player-arena-name [trophies]="player.leagueStatistics.previousSeason.trophies"></app-player-arena-name></span>
+                        <br>
+                        <span><app-player-arena-name [trophies]="player.leagueStatistics.previousSeason.trophies"></app-player-arena-name></span>
+                      </p>
+                    </th>
+                    <td class="text-right"></td>
+                  </tr>
+                  <tr>
+                    <th>Rangsor helyezés</th>
+                    <td class="text-right">
+                      <ng-container *ngIf="player.leagueStatistics.previousSeason.hasOwnProperty('rank')">
+                        {{player.leagueStatistics.bestSeason.rank}}
+                      </ng-container>
+                      <ng-container *ngIf="!player.leagueStatistics.previousSeason.hasOwnProperty('rank')">
+                        Nincs
+                      </ng-container>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Kupaszám</th>
+                    <td class="text-right">{{player.leagueStatistics.previousSeason.trophies | number}}</td>
+                  </tr>
+                  <tr>
+                    <th>Legmagasabb kupaszám</th>
+                    <td class="text-right">
+                      <ng-container *ngIf="player.leagueStatistics.previousSeason.hasOwnProperty('bestTrophies')">
+                        {{player.leagueStatistics.previousSeason.bestTrophies | number}}
+                      </ng-container>
+                      <ng-container *ngIf="!player.leagueStatistics.previousSeason.hasOwnProperty('bestTrophies')">
+                        0
+                      </ng-container>
+                    </td>
+                  </tr>
+                </ng-container>
                 </tbody>
               </table>
             </div>
             <div class="col-md border-0">
               <table class="table">
-                <h5 class="card-title">
-                  <img class="ml-2 mr-1"
-                       src="assets/clan-wars.png">
-                  <strong>
-                    Klán
-                    alapadatok
-                  </strong>
-                </h5>
-                <tbody>
+                <tbody class="small">
                 <tr>
-                  <th>Név</th>
-                  <td class="text-right" *ngIf="player.hasOwnProperty('clan')">
-                    {{player.clan.name}}
-                  </td>
-                  <td class="text-right" *ngIf="!player.hasOwnProperty('clan')">
-                    N/A
+                  <th style="border-top: none;">
+                    <h6 class="card-title">
+                      <strong>
+                        Csata statisztikák
+                      </strong>
+                    </h6>
+                  </th>
+                  <td style="border-top: none;"></td>
+                  <td style="border-top: none;">
+                    <img class="float-right"
+                         src="assets/battle.png">
                   </td>
                 </tr>
                 <tr>
-                  <th>Azonosító</th>
-                  <td class="text-right" *ngIf="player.hasOwnProperty('clan')">
-                    {{player.clan.tag.substr(1)}}
-                  </td>
-                  <td class="text-right" *ngIf="!player.hasOwnProperty('clan')">
-                    N/A
-                  </td>
+                  <th class="font-weight-bold" style="border-top: none;">Klánháborúk</th>
+                  <td class="text-right" style="border-top: none;"></td>
                 </tr>
                 <tr>
-                  <th>Játékos szerepköre</th>
-                  <td class="text-right" *ngIf="player.hasOwnProperty('clan')">
-                    <app-player-clan-role [playerClanRole]="player.role"></app-player-clan-role>
-                  </td>
-                  <td class="text-right" *ngIf="!player.hasOwnProperty('clan')">
-                    N/A
-                  </td>
-                </tr>
-                <tr>
-                  <th>Játékos donation a héten</th>
-                  <td class="text-right" *ngIf="player.hasOwnProperty('clan')">
-                    {{player.donations | number}}
-                  </td>
-                  <td class="text-right" *ngIf="!player.hasOwnProperty('clan')">
-                    N/A
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md border-0">
-              <table class="table">
-                <h5 class="card-title">
-                  <img class="ml-2 mr-1"
-                       src="assets/battle.png">
-                  <strong>
-                    Játékos
-                    statisztika
-                  </strong>
-                </h5>
-                <tbody>
-                <tr>
-                  <th>Győzelmek</th>
-                  <td class="text-right">{{player.wins | number}}</td>
-                </tr>
-                <tr>
-                  <th>Vereségek</th>
-                  <td class="text-right">{{player.losses | number}}</td>
+                  <th>
+                    Gyűjtött kártyák
+                  </th>
+                  <td></td>
+                  <td class="text-right">{{player.clanCardsCollected| number}}</td>
                 </tr>
                 <tr>
                   <th>War day győzelmek</th>
-                  <td class="text-right">{{player.warDayWins | number}}</td>
+                  <td></td>
+                  <td class="text-right">
+                    {{player.warDayWins | number}}
+                  </td>
+                </tr>
+                <br>
+                <tr>
+                  <th class="font-weight-bold text-left" style="border-top: none;">Ladder + Challengek</th>
+                  <th class="font-weight-bold" style="border-top: none;">Szám</th>
+                  <th class="font-weight-bold text-right" style="border-top: none;">Százalék</th>
                 </tr>
                 <tr>
-                  <th>Szint</th>
-                  <td class="text-right">{{player.expLevel}}</td>
+                  <th class="font-weight-bold text-left">Győzelmek</th>
+                  <td>{{player.wins | number}}</td>
+                  <td class="text-right">{{player.wins / (player.battleCount - draws) * 100 | number}}%</td>
+                </tr>
+                <tr>
+                  <th class="font-weight-bold text-left">Vereségek</th>
+                  <td>{{player.losses | number}}</td>
+                  <td class="text-right">{{player.losses / (player.battleCount - draws) * 100 | number}}%</td>
+                </tr>
+                <br>
+                <tr>
+                  <th style="border-top: none;">
+                    <p class="mb-0 font-weight-bold">1v1 döntetlenek</p>
+                    És 2v2 csaták
+                  </th>
+                  <td style="border-top: none;"></td>
+                  <td class="text-right align-middle" style="border-top: none;">{{draws | number}}</td>
+                </tr>
+                <tr>
+                  <th class="font-weight-bold">
+                    Összes csata
+                  </th>
+                  <td></td>
+                  <td class="text-right">{{player.battleCount | number}}</td>
+                </tr>
+                <tr>
+                  <th class="font-weight-bold text-left">Három koronás győzelmek</th>
+                  <td></td>
+                  <td class="text-right">{{player.threeCrownWins | number}}</td>
+                </tr>
+                <tr>
+                  <th class="font-weight-bold text-left">Min. játékkal töltött idő</th>
+                  <td></td>
+                  <td class="text-right"></td>
+                </tr>
+                <tr>
+                  <th class="text-left">Ladder + challengek</th>
+                  <td></td>
+                  <td class="text-right">-</td>
+                </tr>
+                <tr>
+                  <th class="text-left">Tournamentek</th>
+                  <td></td>
+                  <td class="text-right">-</td>
+                </tr>
+                <tr>
+                  <th class="text-left">Összesen</th>
+                  <td></td>
+                  <td class="text-right">-</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row px-3">
+            <div class="col-md border-right border-sm-right-none">
+              <table class="table">
+                <tbody class="small">
+                <tr>
+                  <th style="border-top: none;">
+                    <h6 class="card-title">
+                      <strong>
+                        Challenge statisztikák
+                      </strong>
+                    </h6>
+                  </th>
+                  <td style="border-top: none;">
+                    <img class="float-right"
+                         src="assets/challenges.png">
+                  </td>
+                </tr>
+                <tr>
+                  <th class="font-weight-bold" style="border-top: none;">Challengek</th>
+                  <td class="text-right" style="border-top: none;"></td>
+                </tr>
+                <tr>
+                  <th>
+                    Max győzelem
+                  </th>
+                  <td class="text-right">{{player.challengeMaxWins| number}}</td>
+                </tr>
+                <tr>
+                  <th>Nyert kártyák</th>
+                  <td class="text-right">
+                    {{player.challengeCardsWon | number}}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Klasszikus challenge 12 győzelmek</th>
+                  <td class="text-right">
+                    {{challenge12Wins | number}}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Grand challenge 12 győzelmek</th>
+                  <td class="text-right">{{grandChallenge12Wins | number}}</td>
+                </tr>
+                <tr>
+                  <th class="font-weight-bold">Tournamentek</th>
+                  <td class="text-right"></td>
+                </tr>
+                <tr>
+                  <th>
+                    Összes csata
+                  </th>
+                  <td class="text-right">{{player.tournamentBattleCount| number}}</td>
+                </tr>
+                <tr>
+                  <th>Nyert kártyák</th>
+                  <td class="text-right">
+                    {{player.tournamentCardsWon | number}}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Kártyák csatánként</th>
+                  <td class="text-right">
+                    {{player.tournamentCardsWon / player.tournamentBattleCount | number}}
+                  </td>
+                </tr>
+                <tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md border-0">
+              <table class="table">
+                <tbody class="small">
+                <tr>
+                  <th style="border-top: none;">
+                    <h6 class="card-title">
+                      <strong>
+                        Egyéb statisztikák
+                      </strong>
+                    </h6>
+                  </th>
+                  <td style="border-top: none;">
+                    <img class="float-right"
+                         src="assets/cards.png">
+                  </td>
+                </tr>
+                <tr>
+                  <th style="border-top: none;">Szint</th>
+                  <td class="text-right" style="border-top: none;">Level {{player.expLevel | number}}</td>
+                </tr>
+                <tr>
+                  <th>Megtalált kártyák</th>
+                  <td class="text-right">{{player.cards.length}} / {{cardsCount}}</td>
                 </tr>
                 <tr>
                   <th>Összes donation</th>
-                  <td class="text-right">{{player.donations | number}}</td>
+                  <td class="text-right">{{player.totalDonations | number}}</td>
                 </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col-md border-0">
-              <table class="table">
-                <h5 class="card-title">
-                  <img class="ml-2 mr-1"
-                       src="assets/challenges.png">
-                  <strong>
-                    Játékos
-                    eredmények
-                  </strong>
-                </h5>
-                <tbody>
-                <tr>
-                  <th>Challenge max. győzelmek</th>
-                  <td class="text-right">{{player.challengeMaxWins | number}}</td>
-                </tr>
-                <tr>
-                  <th>Challenge gyűjtött kártyák</th>
-                  <td class="text-right">{{player.challengeCardsWon | number}}</td>
-                </tr>
-                <tr>
-                  <th>Tournament gyűjtött kártyák</th>
-                  <td class="text-right">{{player.tournamentCardsWon | number}}</td>
-                </tr>
-                <tr>
-                  <th>Toplista helyezés</th>
-                  <td class="text-right">
-                  </td>
-                </tr>
+                <ng-container *ngIf="player.expLevel === 13">
+                  <tr>
+                    <th>Star pontok</th>
+                    <td class="text-right">{{player.starPoints | number}}</td>
+                  </tr>
+                </ng-container>
                 </tbody>
               </table>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md border-0">
-              <table class="table">
-                <h5 class="card-title">
-                  <img class="ml-2 mr-1"
-                       src="assets/legendaryPoints.png">
-                  <strong>
-                    Játékos szezon
-                    eredmények
-                  </strong>
-                </h5>
-                <tbody>
-                <tr>
-                  <th>Jelenlegi szezon</th>
-                  <td class="text-right">
-                    {{player.leagueStatistics.currentSeason.trophies | number}}
-                  </td>
-                </tr>
-                <tr>
-                  <th>Előző szezon</th>
-                  <td class="text-right">
-                    {{player.leagueStatistics.previousSeason?.trophies |number}}
-                  </td>
-                </tr>
-                <tr>
-                  <th>Legjobb szezon</th>
-                  <td class="text-right">
-                    {{player.leagueStatistics.bestSeason?.trophies | number}}
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col-md border-0">
-            </div>
-          </div>
-          <div class="container container-fluid mb-2">
+          <div class="container container-fluid mb-2 border-top mt-2">
             <div class="row px-3">
               <div class="col-md border-0">
-                <table class="table">
-                <span class="card-title font-weight-bold pl-3">
+                <table class="table mt-3">
+                <span class="card-title font-weight-bold pl-2">
                     Pakli<a href="{{player.deckLink}}"> (import) </a>
                 </span>
-                  <p class="card-title pl-3">
+                  <p class="card-title pl-2">
                     <a href="#">Összes használt pakli <span class="oi oi-arrow-right"></span></a>
                   </p>
                   <tbody>

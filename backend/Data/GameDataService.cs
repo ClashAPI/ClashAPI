@@ -124,5 +124,15 @@ namespace backend.Data
             
             return JsonConvert.DeserializeObject(Query("https://proxy.royaleapi.dev/v1/locations/global/rankings/players"));
         }
+
+        public object GetCards(int? limit = null)
+        {
+            if (limit != null)
+            {
+                return JsonConvert.DeserializeObject(Query("https://proxy.royaleapi.dev/v1/cards" + "?limit=" + limit));
+            }
+            
+            return JsonConvert.DeserializeObject(Query("https://proxy.royaleapi.dev/v1/cards"));
+        }
     }
 }

@@ -13,5 +13,6 @@ namespace backend.Data
         Task<PlayerUpcomingChest[]> GetPlayerChestsAsync(string playerTag);
         Task<Clan> GetClanAsync(string clanTag);
         object GetPlayerLeaderboard(int? limit = null);
+        object GetCards(int? limit = null);
     }
 }

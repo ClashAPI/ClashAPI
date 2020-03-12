@@ -44,6 +44,8 @@
               Oldalak
             </a>
             <div class="dropdown-menu" *dropdownMenu>
+              <a class="dropdown-item" target="_blank" rel="noopener noreferrer"
+                 href="https://status.clashapi.net/" (click)="isCollapsed = !isCollapsed" i18n><i class="fa fa-heartbeat mr-2"></i> Státusz</a>
               <a class="dropdown-item atlassian" target="_blank" rel="noopener noreferrer"
                  href="https://clashapi.atlassian.net/" (click)="isCollapsed = !isCollapsed" i18n><i class="fab fa-atlassian mr-2"></i> Atlassian Cloud</a>
               <a class="dropdown-item sentry" target="_blank" rel="noopener noreferrer"
@@ -55,10 +57,10 @@
             </div>
           </li>
           <li class="nav-item d-none d-xl-block">
-            <a class="nav-link nav-link-ltr" href="https://clashapi.atlassian.net/servicedesk/customer/portal/2" (click)="isCollapsed ? isCollapsed = false : isCollapsed" i18n>Segítség</a>
+            <a class="nav-link nav-link-ltr" href="https://clashapi.atlassian.net/servicedesk/customer/portal/2" target="_blank" i18n>Segítség</a>
           </li>
           <li class="nav-item sponsors d-none d-xl-block">
-            <a class="nav-link nav-link-ltr" href="https://www.goraczroland.dev/web/site/tamogatok" (click)="isCollapsed ? isCollapsed = false : isCollapsed" i18n>Szponzorok</a>
+            <a class="nav-link nav-link-ltr" href="https://www.goraczroland.dev/web/site/tamogatok" target="_blank" i18n>Szponzorok</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">

@@ -1,8 +1,8 @@
 <div class="card-body bg-white" style="padding: 0 !important">
-  <div class="p-3">
-    <app-player-arena [player]="player"></app-player-arena>
-    <h5 class="card-title ml-3">
-      <strong>{{player.name}}</strong> <span> ({{player.expLevel}})</span>
+  <div class="py-4 px-3">
+    <app-player-arena [player]="player" [class]="'float-right'" [width]="'12%'"></app-player-arena>
+    <h5 class="card-title ml-3 mb-0">
+      <strong>{{player.name}}</strong>
 
       <a class="pl-2" *ngIf="loggedIn()">
         <ng-container *ngIf="isFollowing === false">
@@ -24,8 +24,8 @@
               </span>
       </a>
     </h5>
-    <section class="card-title ml-3">{{player.tag}}</section>
-    <section class="card-title ml-3">
+    <small class="card-title ml-3">{{player.tag}}</small>
+    <section class="card-title ml-3 mt-1">
       {{player.trophies | number }} /
       {{player.bestTrophies | number}} PB <img src="assets/trophy.png"
                                                     style="width: 38px;" class="px-2"> |

@@ -37,7 +37,7 @@
         </td>
         <td style="vertical-align: middle;"><a href="#"><img class="mr-2" src="assets/cards.png"></a></td>
         <td style="vertical-align: middle;">
-        <a [routerLink]="['player/' + player.tag + '/battles']">
+        <a [routerLink]="['/player/' + player.tag.substr(1) + '/battles']">
                                 <img class="mr-2" src="assets/battle.png">
                             </a>
                         </td>

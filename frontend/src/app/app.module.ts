@@ -58,6 +58,8 @@ import {AdminAnnouncementsComponent} from './admin/admin-announcements/admin-ann
 import {AnnouncementsComponent} from './announcements/announcements.component';
 import {NgxSelectModule} from 'ngx-select-ex';
 import {PlayerLeaderboardComponent} from './player/player-leaderboard/player-leaderboard.component';
+import {LazyLoadImageModule} from 'ng-lazyload-image';
+import {PlayerArenaNameComponent} from './player/player-arena-name/player-arena-name.component';
 
 
 Sentry.init({
@@ -102,6 +104,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         QueryClanComponent,
         PlayerDetailsComponent,
         PlayerArenaComponent,
+        PlayerArenaNameComponent,
         PlayerChestsComponent,
         PlayerDeckComponent,
         PlayerBattlesComponent,
@@ -135,7 +138,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         HttpClientModule,
         JwtModule.forRoot({
             config: {
-                tokenGetter: tokenGetter,
+                tokenGetter,
                 whitelistedDomains: ['localhost:5001'],
                 blacklistedRoutes: ['localhost:5001/api/auth'],
             }
@@ -154,6 +157,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         PopoverModule.forRoot(),
         CKEditorModule,
         NgxSelectModule,
+        LazyLoadImageModule,
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     ],
   providers: [

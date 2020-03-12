@@ -2,17 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend.Data;
 using backend.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
-    /*
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class CardsController : ControllerBase
     {
+        private readonly IGameDataService _gameDataService;
+
+        public CardsController(IGameDataService gameDataService)
+        {
+            _gameDataService = gameDataService;
+        }
+        
+        [HttpGet]
+        public IActionResult GetCards([FromQuery] int? limit)
+        {
+            return Ok(_gameDataService.GetCards(limit));
+        }
+        
+        /*
         [HttpGet("level")]
         public IActionResult GetCardLevel(CardLevelDto cardLevelDto)
         {
@@ -151,6 +167,6 @@ namespace backend.Controllers
 
             return BadRequest();
         }
+        */
     }
-    */
 }
