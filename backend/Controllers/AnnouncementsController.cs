@@ -57,7 +57,7 @@ namespace backend.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAnnouncement(Guid id, CreateAnnouncementDto createAnnouncementDto)
+        public async Task<IActionResult> PutAnnouncement([FromRoute] Guid id, [FromBody] CreateAnnouncementDto createAnnouncementDto)
         {
             switch (createAnnouncementDto.Type)
             {
@@ -117,24 +117,25 @@ namespace backend.Controllers
                 default:
                     return BadRequest();
             }
-            
+
             var announcement = new Announcement
             {
                 Subject = createAnnouncementDto.Subject,
                 Type = createAnnouncementDto.Type,
                 Author = await _userManager.GetUserAsync(User)
-            };
-            await _repository.AddAsync(announcement);
+            }; 
+            
+            var result = await _repository.AddAsync(announcement);
             await _repository.SaveAllAsync();
 
-            return Ok(new {announcement.Id, userName = announcement.Author.UserName, announcement.Subject, announcement.Type, announcement.CreatedAt});
+            return Ok(new {result.Entity.Id, userName = result.Entity.Author.UserName, result.Entity.Subject, result.Entity.Type, result.Entity.CreatedAt});
         }
 
         // DELETE: api/Announcements/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Announcement>> DeleteAnnouncement(Guid id)
         {
-            var announcement = _repository.GetAnnouncementAsync(id);
+            var announcement = await _repository.GetAnnouncementAsync(id);
             if (announcement == null)
             {
                 return NotFound();

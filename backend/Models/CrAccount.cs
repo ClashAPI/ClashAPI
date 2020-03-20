@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend.Models
 {
@@ -10,7 +12,9 @@ namespace backend.Models
             ExpiresAt = DateTime.Now.AddDays(1);
         }
 
-        public int Id { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
         public string PlayerId { get; set; }
         public virtual User User { get; set; }
         public bool IsVerified { get; set; }

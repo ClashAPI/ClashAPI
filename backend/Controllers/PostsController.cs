@@ -47,7 +47,7 @@ namespace backend.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetPost(int id)
+        public async Task<IActionResult> GetPost(Guid id)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace backend.Controllers
 
         [Authorize(Roles = "Fejlesztő")]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePost(int id)
+        public async Task<IActionResult> DeletePost(Guid id)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace backend.Controllers
 
         [Authorize(Roles = "Fejlesztő")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePost(int id, UpdatePostDto updatePostDto)
+        public async Task<IActionResult> UpdatePost(Guid id, UpdatePostDto updatePostDto)
         {
             try
             {

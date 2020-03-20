@@ -54,109 +54,34 @@
             </div>
           </div>
           <div class="row px-3">
-            <div class="col-md border-right border-sm-right-none">
-              <table class="table">
-                <tbody class="small">
-                <tr>
-                  <th style="border-top: none;">
-                    <h6 class="card-title">
-                      <strong>
-                        Szezon statisztikák
-                      </strong>
-                    </h6>
-                  </th>
-                  <td style="border-top: none;">
-                    <img class="float-right"
-                         src="assets/legendaryPoints.png">
-                  </td>
-                </tr>
-                <tr>
-                  <th class="text-uppercase font-weight-bold" style="border-top: none;">Legjobb szezon</th>
-                  <td class="text-right" style="border-top: none;"></td>
-                </tr>
-                <tr>
-                  <th>
-                    <p class="mb-0">
-                      <app-player-arena [trophies]="player.leagueStatistics.bestSeason.trophies" [class]="'float-left mr-2'" [width]="'8%'"></app-player-arena>
-                      <span class="font-weight-bold"><app-player-arena-name [trophies]="player.leagueStatistics.bestSeason.trophies"></app-player-arena-name></span>
-                      <br>
-                      <span><app-player-arena-name [trophies]="player.leagueStatistics.bestSeason.trophies"></app-player-arena-name></span>
-                    </p>
-                  </th>
-                  <td class="text-right"></td>
-                </tr>
-                <tr>
-                  <th>Rangsor helyezés</th>
-                  <td class="text-right">
-                    <ng-container *ngIf="player.leagueStatistics.bestSeason.hasOwnProperty('rank')">
-                      {{player.leagueStatistics.bestSeason.rank}}
-                    </ng-container>
-                    <ng-container *ngIf="!player.leagueStatistics.bestSeason.hasOwnProperty('rank')">
-                      Nincs
-                    </ng-container>
-                  </td>
-                </tr>
-                <tr>
-                  <th>Kupaszám</th>
-                  <td class="text-right">{{player.leagueStatistics.bestSeason.trophies | number}}</td>
-                </tr>
-                <tr>
-                  <th>Dátum</th>
-                  <td class="text-right">{{player.leagueStatistics.bestSeason.id}}</td>
-                </tr>
-                <tr>
-                  <th class="text-uppercase font-weight-bold">Jelenlegi szezon</th>
-                  <td class="text-right"></td>
-                </tr>
-                <tr>
-                  <th>
-                    <p class="mb-0">
-                      <app-player-arena [trophies]="player.leagueStatistics.currentSeason.trophies" [class]="'float-left mr-2'" [width]="'8%'"></app-player-arena>
-                      <span class="font-weight-bold"><app-player-arena-name [trophies]="player.leagueStatistics.currentSeason.trophies"></app-player-arena-name></span>
-                      <br>
-                      <span><app-player-arena-name [trophies]="player.leagueStatistics.currentSeason.trophies"></app-player-arena-name></span>
-                    </p>
-                  </th>
-                  <td class="text-right"></td>
-                </tr>
-                <tr>
-                  <th>Rangsor helyezés</th>
-                  <td class="text-right">
-                    <ng-container *ngIf="player.leagueStatistics.currentSeason.hasOwnProperty('rank')">
-                      {{player.leagueStatistics.bestSeason.rank}}
-                    </ng-container>
-                    <ng-container *ngIf="!player.leagueStatistics.currentSeason.hasOwnProperty('rank')">
-                      Nincs
-                    </ng-container>
-                  </td>
-                </tr>
-                <tr>
-                  <th>Kupaszám</th>
-                  <td class="text-right">{{player.leagueStatistics.currentSeason.trophies | number}}</td>
-                </tr>
-                <tr>
-                  <th>Legmagasabb kupaszám</th>
-                  <td class="text-right">
-                    <ng-container *ngIf="player.leagueStatistics.currentSeason.hasOwnProperty('bestTrophies')">
-                      {{player.leagueStatistics.currentSeason.bestTrophies | number}}
-                    </ng-container>
-                    <ng-container *ngIf="!player.leagueStatistics.currentSeason.hasOwnProperty('bestTrophies')">
-                      0
-                    </ng-container>
-                  </td>
-                </tr>
-                <ng-container *ngIf="player.leagueStatistics.hasOwnProperty('previousSeason')">
+            <ng-container *ngIf="player.hasOwnProperty('leagueStatistics')">
+              <div class="col-md border-right border-sm-right-none">
+                <table class="table">
+                  <tbody class="small">
                   <tr>
-                    <th class="text-uppercase font-weight-bold">Előző szezon</th>
-                    <td class="text-right"></td>
+                    <th style="border-top: none;">
+                      <h6 class="card-title">
+                        <strong>
+                          Szezon statisztikák
+                        </strong>
+                      </h6>
+                    </th>
+                    <td style="border-top: none;">
+                      <img class="float-right"
+                           src="assets/legendaryPoints.png">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="text-uppercase font-weight-bold" style="border-top: none;">Legjobb szezon</th>
+                    <td class="text-right" style="border-top: none;"></td>
                   </tr>
                   <tr>
                     <th>
                       <p class="mb-0">
-                        <app-player-arena [trophies]="player.leagueStatistics.previousSeason.trophies" [class]="'float-left mr-2'" [width]="'8%'"></app-player-arena>
-                        <span class="font-weight-bold"><app-player-arena-name [trophies]="player.leagueStatistics.previousSeason.trophies"></app-player-arena-name></span>
+                        <app-player-arena [trophies]="player.leagueStatistics.bestSeason.trophies" [class]="'float-left mr-2'" [width]="'8%'"></app-player-arena>
+                        <span class="font-weight-bold"><app-player-arena-name [trophies]="player.leagueStatistics.bestSeason.trophies"></app-player-arena-name></span>
                         <br>
-                        <span><app-player-arena-name [trophies]="player.leagueStatistics.previousSeason.trophies"></app-player-arena-name></span>
+                        <span><app-player-arena-name [trophies]="player.leagueStatistics.bestSeason.trophies"></app-player-arena-name></span>
                       </p>
                     </th>
                     <td class="text-right"></td>
@@ -164,33 +89,110 @@
                   <tr>
                     <th>Rangsor helyezés</th>
                     <td class="text-right">
-                      <ng-container *ngIf="player.leagueStatistics.previousSeason.hasOwnProperty('rank')">
+                      <ng-container *ngIf="player.leagueStatistics.bestSeason.hasOwnProperty('rank')">
                         {{player.leagueStatistics.bestSeason.rank}}
                       </ng-container>
-                      <ng-container *ngIf="!player.leagueStatistics.previousSeason.hasOwnProperty('rank')">
+                      <ng-container *ngIf="!player.leagueStatistics.bestSeason.hasOwnProperty('rank')">
                         Nincs
                       </ng-container>
                     </td>
                   </tr>
                   <tr>
                     <th>Kupaszám</th>
-                    <td class="text-right">{{player.leagueStatistics.previousSeason.trophies | number}}</td>
+                    <td class="text-right">{{player.leagueStatistics.bestSeason.trophies | number}}</td>
+                  </tr>
+                  <tr>
+                    <th>Dátum</th>
+                    <td class="text-right">{{player.leagueStatistics.bestSeason.id}}</td>
+                  </tr>
+                  <tr>
+                    <th class="text-uppercase font-weight-bold">Jelenlegi szezon</th>
+                    <td class="text-right"></td>
+                  </tr>
+                  <tr>
+                    <th>
+                      <p class="mb-0">
+                        <app-player-arena [trophies]="player.leagueStatistics.currentSeason.trophies" [class]="'float-left mr-2'" [width]="'8%'"></app-player-arena>
+                        <span class="font-weight-bold"><app-player-arena-name [trophies]="player.leagueStatistics.currentSeason.trophies"></app-player-arena-name></span>
+                        <br>
+                        <span><app-player-arena-name [trophies]="player.leagueStatistics.currentSeason.trophies"></app-player-arena-name></span>
+                      </p>
+                    </th>
+                    <td class="text-right"></td>
+                  </tr>
+                  <tr>
+                    <th>Rangsor helyezés</th>
+                    <td class="text-right">
+                      <ng-container *ngIf="player.leagueStatistics.currentSeason.hasOwnProperty('rank')">
+                        {{player.leagueStatistics.bestSeason.rank}}
+                      </ng-container>
+                      <ng-container *ngIf="!player.leagueStatistics.currentSeason.hasOwnProperty('rank')">
+                        Nincs
+                      </ng-container>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Kupaszám</th>
+                    <td class="text-right">{{player.leagueStatistics.currentSeason.trophies | number}}</td>
                   </tr>
                   <tr>
                     <th>Legmagasabb kupaszám</th>
                     <td class="text-right">
-                      <ng-container *ngIf="player.leagueStatistics.previousSeason.hasOwnProperty('bestTrophies')">
-                        {{player.leagueStatistics.previousSeason.bestTrophies | number}}
+                      <ng-container *ngIf="player.leagueStatistics.currentSeason.hasOwnProperty('bestTrophies')">
+                        {{player.leagueStatistics.currentSeason.bestTrophies | number}}
                       </ng-container>
-                      <ng-container *ngIf="!player.leagueStatistics.previousSeason.hasOwnProperty('bestTrophies')">
+                      <ng-container *ngIf="!player.leagueStatistics.currentSeason.hasOwnProperty('bestTrophies')">
                         0
                       </ng-container>
                     </td>
                   </tr>
-                </ng-container>
-                </tbody>
-              </table>
-            </div>
+                  <ng-container *ngIf="player.leagueStatistics.hasOwnProperty('previousSeason')">
+                    <tr>
+                      <th class="text-uppercase font-weight-bold">Előző szezon</th>
+                      <td class="text-right"></td>
+                    </tr>
+                    <tr>
+                      <th>
+                        <p class="mb-0">
+                          <app-player-arena [trophies]="player.leagueStatistics.previousSeason.trophies" [class]="'float-left mr-2'" [width]="'8%'"></app-player-arena>
+                          <span class="font-weight-bold"><app-player-arena-name [trophies]="player.leagueStatistics.previousSeason.trophies"></app-player-arena-name></span>
+                          <br>
+                          <span><app-player-arena-name [trophies]="player.leagueStatistics.previousSeason.trophies"></app-player-arena-name></span>
+                        </p>
+                      </th>
+                      <td class="text-right"></td>
+                    </tr>
+                    <tr>
+                      <th>Rangsor helyezés</th>
+                      <td class="text-right">
+                        <ng-container *ngIf="player.leagueStatistics.previousSeason.hasOwnProperty('rank')">
+                          {{player.leagueStatistics.bestSeason.rank}}
+                        </ng-container>
+                        <ng-container *ngIf="!player.leagueStatistics.previousSeason.hasOwnProperty('rank')">
+                          Nincs
+                        </ng-container>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Kupaszám</th>
+                      <td class="text-right">{{player.leagueStatistics.previousSeason.trophies | number}}</td>
+                    </tr>
+                    <tr>
+                      <th>Legmagasabb kupaszám</th>
+                      <td class="text-right">
+                        <ng-container *ngIf="player.leagueStatistics.previousSeason.hasOwnProperty('bestTrophies')">
+                          {{player.leagueStatistics.previousSeason.bestTrophies | number}}
+                        </ng-container>
+                        <ng-container *ngIf="!player.leagueStatistics.previousSeason.hasOwnProperty('bestTrophies')">
+                          0
+                        </ng-container>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </ng-container>
             <div class="col-md border-0">
               <table class="table">
                 <tbody class="small">

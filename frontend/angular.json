@@ -32,6 +32,25 @@
               "src/assets/js/jquery.dataTables.min.js",
               "src/assets/js/dataTables.bootstrap4.min.js",
               "src/assets/js/twitter_widgets.js"
+            ],
+            "lazyModules": [
+              "src/app/player/player-details/player-details.component",
+              "src/app/clan/clan-details/clan-details.component",
+              "src/app/player/player-battles/player-battles.component",
+              "src/app/login/login.component",
+              "src/app/register/register.component",
+              "src/app/query/query-player/query-player.component",
+              "src/app/query/query-clan/query-clan.component",
+              "src/app/user/user-profile/user-profile.component",
+              "src/app/admin/admin-users/admin-users.component",
+              "src/app/admin/admin-health/admin-health.component",
+              "src/app/query/query-info/query-info.component",
+              "src/app/favorites/favorites/favorites.component",
+              "src/app/admin/admin-posts/admin-posts.component",
+              "src/app/user/user-cr-accounts/user-cr-accounts.component",
+              "src/app/admin/admin-cr-accounts/admin-cr-accounts.component",
+              "src/app/admin/admin-announcements/admin-announcements.component",
+              "src/app/player/player-leaderboard/player-leaderboard.component"
             ]
           },
           "configurations": {

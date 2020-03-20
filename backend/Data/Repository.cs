@@ -44,7 +44,7 @@ namespace backend.Data
             return await _context.Users.Where(u => u.CreatedAt.Date == DateTime.Today).ToListAsync();
         }
 
-        public async Task<User> GetUserAsync(int id)
+        public async Task<User> GetUserAsync(Guid id)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
@@ -98,7 +98,7 @@ namespace backend.Data
             return isFollowing;
         }
         
-        public async Task<CrAccount> GetCrAccountAsync(int userId, string playerId)
+        public async Task<CrAccount> GetCrAccountAsync(Guid userId, string playerId)
         {
             return await _context.CrAccounts.FirstOrDefaultAsync(a => a.PlayerId == playerId && a.User.Id == userId);
         }
@@ -121,7 +121,7 @@ namespace backend.Data
 
         public async Task<Announcement> GetAnnouncementAsync(Guid announcementId)
         {
-            return await _context.Announcements.FindAsync(announcementId);
+            return await _context.Announcements.FirstOrDefaultAsync(a => a.Id == announcementId);
         }
     }
 }

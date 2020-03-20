@@ -69,6 +69,7 @@ export class AdminAnnouncementsComponent implements OnInit {
         this.announcements.push(data);
         this.noty.success();
       }, (error) => {
+        console.log(this.model);
         this.noty.error('A közlemény mentése sikertelen');
         console.log(error);
       });

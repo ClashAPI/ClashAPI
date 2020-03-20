@@ -45,8 +45,9 @@ namespace backend.Controllers
             return Ok(usersToReturn);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}", Name = "GetUser")]
-        public async Task<IActionResult> GetUser(int id)
+        public async Task<IActionResult> GetUser(Guid id)
         {
             var user = await _repository.GetUserAsync(id);
             var userToReturn = _mapper.Map<UserForListDto>(user);
@@ -55,9 +56,9 @@ namespace backend.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto)
+        public async Task<IActionResult> UpdateUser(Guid id, UserForUpdateDto userForUpdateDto)
         {
-            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) return Unauthorized();
+            if (id != Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) return Unauthorized();
 
             try
             {
@@ -75,8 +76,9 @@ namespace backend.Controllers
             // throw new Exception($"Failed to save user with ID {id}");
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}/accounts")]
-        public async Task<IActionResult> GetAccounts(int id)
+        public async Task<IActionResult> GetAccounts(Guid id)
         {
             var user = await _repository.GetUserAsync(id);
 
@@ -91,7 +93,7 @@ namespace backend.Controllers
         }
 
         [HttpPost("{id}/accounts/{playerId}")]
-        public async Task<IActionResult> AddCrAccount(int id, string playerId)
+        public async Task<IActionResult> AddCrAccount(Guid id, string playerId)
         {
             try
             {
@@ -123,7 +125,7 @@ namespace backend.Controllers
         }
 
         [HttpDelete("{id}/accounts/{playerId}")]
-        public async Task<IActionResult> DeleteCrAccount(int id, string playerId)
+        public async Task<IActionResult> DeleteCrAccount(Guid id, string playerId)
         {
             try
             {
@@ -145,7 +147,7 @@ namespace backend.Controllers
 
         // [AllowAnonymous]
         [HttpPost("{id}/accounts/{playerId}/verify")]
-        public async Task<IActionResult> VerifyCrAccount(int id, string playerId)
+        public async Task<IActionResult> VerifyCrAccount(Guid id, string playerId)
         {
             try
             {
@@ -173,7 +175,7 @@ namespace backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteUser(Guid id)
         {
             var user = await _repository.GetUserAsync(id);
             var currentUser = await _userManager.GetUserAsync(User);
@@ -190,7 +192,7 @@ namespace backend.Controllers
         }
 
         [HttpGet("{id}/roles")]
-        public async Task<IActionResult> GetUserRoles(int id)
+        public async Task<IActionResult> GetUserRoles(Guid id)
         {
             return Ok(await _userManager.GetRolesAsync(await _repository.GetUserAsync(id)));
         }

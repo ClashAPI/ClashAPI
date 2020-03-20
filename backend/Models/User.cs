@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace backend.Models
 {
-    public class User : IdentityUser<int>
+    public class User : IdentityUser<Guid>
     {
         public User()
         {
@@ -18,5 +18,7 @@ namespace backend.Models
         public virtual ICollection<UserRole> UserRoles { get; set; }
         public virtual IList<PlayerFollow> PlayerFollows { get; set; }
         public virtual IList<ClanFollow> ClanFollows { get; set; }
+        public virtual IList<Announcement> Announcements { get; set; }
+        public virtual IList<Post> Posts { get; set; }
     }
 }

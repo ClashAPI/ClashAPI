@@ -72,7 +72,7 @@ namespace backend
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseLazyLoadingProxies();
-                options.UseSqlServer(Configuration.GetConnectionString("LinuxConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<IGameDataService, GameDataService>();
@@ -96,7 +96,7 @@ namespace backend
 
             services.Configure<GzipCompressionProviderOptions>(options =>
             {
-                options.Level = CompressionLevel.Fastest;
+                options.Level = CompressionLevel.Optimal;
             });
         }
 

@@ -6,7 +6,6 @@ import {NavComponent} from './nav/nav.component';
 import {HomeComponent} from './home/home.component';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {RouterModule} from '@angular/router';
-import {appRoutes} from './routes';
 import {PlayerDetailsComponent} from './player/player-details/player-details.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {PlayerArenaComponent} from './player/player-arena/player-arena.component';
@@ -60,6 +59,7 @@ import {NgxSelectModule} from 'ngx-select-ex';
 import {PlayerLeaderboardComponent} from './player/player-leaderboard/player-leaderboard.component';
 import {LazyLoadImageModule} from 'ng-lazyload-image';
 import {PlayerArenaNameComponent} from './player/player-arena-name/player-arena-name.component';
+import {appRoutes} from "./routes";
 
 
 Sentry.init({
@@ -132,7 +132,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         FavoriteDecksComponent,
     ],
     imports: [
-        RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),
+        RouterModule.forRoot(appRoutes),
         BrowserModule.withServerTransition({appId: 'serverApp'}),
         BrowserAnimationsModule,
         HttpClientModule,

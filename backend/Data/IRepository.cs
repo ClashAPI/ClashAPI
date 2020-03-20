@@ -14,12 +14,12 @@ namespace backend.Data
         Task<bool> SaveAllAsync();
         Task<IEnumerable<User>> GetUsersAsync();
         Task<IEnumerable<User>> GetUsersRegisteredTodayAsync();
-        Task<User> GetUserAsync(int id);
+        Task<User> GetUserAsync(Guid id);
         Task<User> GetUserAsync(string userName);
         Task<List<string>> GetBadgesAsync(string playerTag);
         Task<bool> GetIsFollowingPlayerAsync(string id, System.Security.Claims.ClaimsPrincipal user);
         Task<bool> GetIsFollowingClanAsync(string id, System.Security.Claims.ClaimsPrincipal user);
-        Task<CrAccount> GetCrAccountAsync(int userId, string playerId);
+        Task<CrAccount> GetCrAccountAsync(Guid userId, string playerId);
         Task<List<CrAccount>> GetCrAccountsAsync(string playerId);
         Task<bool> GetIfCrAccountExistsAsync(string playerId);
         Task<bool> GetIfAnnouncementExistsAsync(Guid announcementId);

@@ -42,6 +42,7 @@
     "datatables.net-dt": "^1.10.20",
     "express": "^4.15.2",
     "font-awesome": "^4.7.0",
+    "http-server": "^0.12.1",
     "jquery": "^3.4.1",
     "moment": "^2.24.0",
     "ng-lazyload-image": "^7.1.0",
