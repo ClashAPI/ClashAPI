@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using backend.Data;
+using backend.Repositories;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,8 +14,8 @@ namespace backend.Helpers
         {
             var resultContent = await next();
             var userId = Guid.Parse(resultContent.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var repo = resultContent.HttpContext.RequestServices.GetService<IRepository>();
-            var user = await repo.GetUserAsync(userId);
+            var repo = resultContent.HttpContext.RequestServices.GetService<IUserRepository>();
+            var user = await repo.GetByIdAsync(userId);
             user.LastActive = DateTime.Now;
 
             await repo.SaveAllAsync();

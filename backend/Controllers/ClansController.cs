@@ -4,6 +4,8 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using backend.Data;
 using backend.Models;
+using backend.Repositories;
+using backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,13 +23,13 @@ namespace backend.Controllers
     [AllowAnonymous]
     public class ClansController : ControllerBase
     {
-        private readonly IRepository _repository;
         private readonly IGameDataService _gameDataService;
+        private readonly IFollowService _followService;
 
-        public ClansController(IRepository repository, IGameDataService gameDataService)
+        public ClansController(IGameDataService gameDataService, IFollowService followService)
         {
-            _repository = repository;
             _gameDataService = gameDataService;
+            _followService = followService;
         }
 
         [ResponseCache(Duration = 47, Location = ResponseCacheLocation.Any)]
@@ -41,7 +43,7 @@ namespace backend.Controllers
         [HttpGet("{id}/followage")]
         public async Task<IActionResult> GetIsFollowingClan(string id)
         {
-            return Ok(await _repository.GetIsFollowingClanAsync(id, User));
+            return Ok(await _followService.GetIsFollowingClanByClanTagAndUserAsync(id, User));
         }
     }
 }

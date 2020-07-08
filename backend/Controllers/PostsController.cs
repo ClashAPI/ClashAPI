@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using backend.Data;
 using backend.DTOs;
 using backend.Models;
+using backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers
 {
@@ -16,17 +14,16 @@ namespace backend.Controllers
     [ApiController]
     public class PostsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
-        private readonly IRepository _repository;
+        private readonly IPostService _postService;
         private readonly UserManager<User> _userManager;
 
-        public PostsController(ApplicationDbContext context, UserManager<User> userManager, IMapper mapper, IRepository repository)
+        public PostsController(UserManager<User> userManager, 
+            IMapper mapper, IPostService postService)
         {
-            _context = context;
             _userManager = userManager;
             _mapper = mapper;
-            _repository = repository;
+            _postService = postService;
         }
 
         [AllowAnonymous]
@@ -35,10 +32,7 @@ namespace backend.Controllers
         {
             try
             {
-                return Ok(await _context.Posts
-                    .Select(i => new {i.Id, i.Author.UserName, i.Title, i.Content, i.IsVisible, i.CreatedAt, i.UpdatedAt})
-                    .OrderByDescending(i => i.CreatedAt)
-                    .ToListAsync());
+                return Ok(await _postService.GetAllAsync());
             }
             catch (Exception e)
             {
@@ -51,9 +45,7 @@ namespace backend.Controllers
         {
             try
             {
-                return Ok(await _context.Posts
-                    .Select(i => new { i.Id, i.Author.UserName, i.Title, i.Content, i.CreatedAt, i.UpdatedAt })
-                    .FirstOrDefaultAsync(p => p.Id == id));
+                return Ok(await _postService.GetByIdAsync(id));
             }
             catch (Exception e)
             {
@@ -67,9 +59,9 @@ namespace backend.Controllers
         {
             try
             {
-                var post = await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
-                _repository.Delete(post);
-                await _repository.SaveAllAsync();
+                var post = await _postService.GetByIdAsync(id);
+                _postService.Remove(post);
+                await _postService.SaveAllAsync();
 
                 return Ok();
             }
@@ -85,13 +77,13 @@ namespace backend.Controllers
         {
             try
             {
-                var post = await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
+                var post = await _postService.GetByIdAsync(id);
                 post.Title = updatePostDto.Title;
                 post.Content = updatePostDto.Content;
                 post.IsVisible = updatePostDto.IsVisible;
                 post.UpdatedAt = DateTime.Now;
 
-                await _repository.SaveAllAsync();
+                await _postService.SaveAllAsync();
 
                 return Ok();
             }
@@ -112,8 +104,8 @@ namespace backend.Controllers
 
                 var post = _mapper.Map<Post>(createPostDto);
 
-                var result = await _repository.AddAsync(post);
-                await _repository.SaveAllAsync();
+                var result = await _postService.AddAsync(post);
+                await _postService.SaveAllAsync();
 
                 return Ok(new {id = result.Entity.Id, userName = result.Entity.Author.UserName,
                     title = result.Entity.Title, content = result.Entity.Content, createdAt = result.Entity.CreatedAt});

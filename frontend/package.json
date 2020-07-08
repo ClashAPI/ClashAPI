@@ -12,7 +12,9 @@
     "serve:ssr": "node dist/server",
     "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
     "build:client-and-server-bundles": "ng build --prod && ng run frontend:server:production --bundleDependencies all",
-    "precache": "sw-precache --verbose --config=sw-precache-config.js"
+    "precache": "sw-precache --verbose --config=sw-precache-config.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "private": true,
   "dependencies": {
@@ -43,7 +45,7 @@
     "express": "^4.15.2",
     "font-awesome": "^4.7.0",
     "http-server": "^0.12.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "moment": "^2.24.0",
     "ng-lazyload-image": "^7.1.0",
     "ngx-bootstrap": "^5.3.2",
@@ -53,7 +55,8 @@
     "noty": "^3.2.0-beta",
     "rxjs": "~6.5.4",
     "tslib": "^1.11.1",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.900.4",
@@ -80,5 +83,6 @@
     "tslint": "~5.15.0",
     "typescript": "^3.7.5",
     "webpack-cli": "^3.3.11"
-  }
+  },
+  "snyk": true
 }

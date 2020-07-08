@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using backend.Data;
 using backend.DTOs;
 using backend.Models;
+using backend.Repositories;
+using backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
@@ -19,15 +21,13 @@ namespace backend.Controllers
     [ApiController]
     public class AnnouncementsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
-        private readonly IRepository _repository;
+        private readonly IAnnouncementService _announcementService;
 
-        public AnnouncementsController(ApplicationDbContext context, UserManager<User> userManager, IRepository repository)
+        public AnnouncementsController(UserManager<User> userManager, IAnnouncementService announcementService)
         {
-            _context = context;
             _userManager = userManager;
-            _repository = repository;
+            _announcementService = announcementService;
         }
 
         // GET: api/Announcements
@@ -35,15 +35,14 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<ActionResult> GetAnnouncements()
         {
-            return Ok(await _context.Announcements.Select(p => new { p.Id, p.Subject, p.Type, p.Author.UserName, p.CreatedAt }).ToListAsync());
+            return Ok(await _announcementService.GetAllAsync());
         }
 
         // GET: api/Announcements/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Announcement>> GetAnnouncement(Guid id)
         {
-            var announcement = await _context.Announcements.Select(p => new {p.Id, p.Subject, p.Type, p.Author.UserName, p.CreatedAt})
-                .FirstOrDefaultAsync(p => p.Id == id);
+            var announcement = await _announcementService.GetByIdAsync(id);
 
             if (announcement == null)
             {
@@ -77,15 +76,15 @@ namespace backend.Controllers
             
             try
             {
-                var announcement = await _repository.GetAnnouncementAsync(id);
+                var announcement = await _announcementService.GetByIdAsync(id);
                 announcement.Subject = createAnnouncementDto.Subject;
                 announcement.Type = createAnnouncementDto.Type;
 
-                await _context.SaveChangesAsync();
+                await _announcementService.SaveAllAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await _repository.GetIfAnnouncementExistsAsync(id))
+                if (!await _announcementService.GetIfExistsByIdAsync(id))
                 {
                     return NotFound();
                 }
@@ -125,8 +124,8 @@ namespace backend.Controllers
                 Author = await _userManager.GetUserAsync(User)
             }; 
             
-            var result = await _repository.AddAsync(announcement);
-            await _repository.SaveAllAsync();
+            var result = await _announcementService.AddAsync(announcement);
+            await _announcementService.SaveAllAsync();
 
             return Ok(new {result.Entity.Id, userName = result.Entity.Author.UserName, result.Entity.Subject, result.Entity.Type, result.Entity.CreatedAt});
         }
@@ -135,14 +134,14 @@ namespace backend.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Announcement>> DeleteAnnouncement(Guid id)
         {
-            var announcement = await _repository.GetAnnouncementAsync(id);
+            var announcement = await _announcementService.GetByIdNotFilteredAsync(id);
             if (announcement == null)
             {
                 return NotFound();
             }
 
-            _repository.Delete(announcement);
-            await _repository.SaveAllAsync();
+            _announcementService.Remove(announcement);
+            await _announcementService.SaveAllAsync();
 
             return Ok();
         }

@@ -4,6 +4,10 @@ using AutoMapper;
 using backend.Data;
 using backend.Helpers;
 using backend.Models;
+using backend.Repositories;
+using backend.Repositories.Impl;
+using backend.Services;
+using backend.Services.Impl;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -73,9 +77,25 @@ namespace backend
             {
                 options.UseLazyLoadingProxies();
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-            });
-            services.AddScoped<IRepository, Repository>();
-            services.AddScoped<IGameDataService, GameDataService>();
+            }, ServiceLifetime.Transient);
+            
+            // Inject repositories
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IRoleRepository, RoleRepository>();
+            services.AddTransient<ICRAccountRepository, CRAccountRepository>();
+            services.AddTransient<IAnnouncementRepository, AnnouncementRepository>();
+            services.AddTransient<IPostRepository, PostRepository>();
+            services.AddTransient<IFollowRepository, FollowRepository>();
+
+            // Inject services
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<ICRAccountService, CRAccountService>();
+            services.AddTransient<IAnnouncementService, AnnouncementService>();
+            services.AddTransient<IPostService, PostService>();
+            services.AddTransient<IGameDataService, GameDataService>();
+            services.AddTransient<IFollowService, FollowService>();
+            
             services.AddMvc(options =>
             {
                 options.EnableEndpointRouting = false;
@@ -89,7 +109,8 @@ namespace backend
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
             services.AddCors();
-            services.AddAutoMapper(typeof(Repository).Assembly);
+            services.AddAutoMapper(typeof(UserRepository).Assembly);
+            services.AddAutoMapper(typeof(PostRepository).Assembly);
             services.AddScoped<LogUserActivity>();
 
             services.AddResponseCompression(options => { options.Providers.Add<GzipCompressionProvider>(); });

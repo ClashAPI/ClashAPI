@@ -5,6 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using backend.Data;
 using backend.Models;
+using backend.Repositories;
+using backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,11 +20,11 @@ namespace backend.Controllers
     [AllowAnonymous]
     public class HealthController : ControllerBase
     {
-        private readonly IRepository _repository;
+        private readonly IUserService _userService;
 
-        public HealthController(IRepository repository)
+        public HealthController(IUserService userService)
         {
-            _repository = repository;
+            _userService = userService;
         }
 
         // No longer works after March 1, 2020
@@ -55,9 +57,9 @@ namespace backend.Controllers
         [HttpGet("users")]
         public async Task<IActionResult> GetUserCount()
         {
-            var users = await _repository.GetUsersAsync();
+            var users = await _userService.GetAllAsync();
             var userCount = users.Count();
-            var usersRegisteredToday = _repository.GetUsersRegisteredTodayAsync();
+            var usersRegisteredToday = _userService.GetAllRegisteredTodayAsync();
 
             return Ok(new { usersRegisteredToday, userCount});
         }

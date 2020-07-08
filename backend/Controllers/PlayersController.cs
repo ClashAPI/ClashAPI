@@ -5,6 +5,8 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using backend.Data;
 using backend.Models;
+using backend.Repositories;
+using backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -26,12 +28,14 @@ namespace backend.Controllers
     public class PlayersController : ControllerBase
     {
         private readonly IGameDataService _gameDataService;
-        private readonly IRepository _repository;
+        private readonly IUserService _userService;
+        private readonly IFollowService _followService;
 
-        public PlayersController(IGameDataService gameDataService, IRepository repository)
+        public PlayersController(IGameDataService gameDataService, IUserService userService, IFollowService followService)
         {
             _gameDataService = gameDataService;
-            _repository = repository;
+            _userService = userService;
+            _followService = followService;
         }
 
         [ResponseCache(Duration = 51)]
@@ -44,7 +48,7 @@ namespace backend.Controllers
         [HttpGet("{id}/followage")]
         public async Task<IActionResult> GetIsFollowingPlayer(string id)
         {
-            return Ok(await _repository.GetIsFollowingPlayerAsync(id, User));
+            return Ok(await _followService.GetIsFollowingPlayerByPlayerTagAndUserAsync(id, User));
         }
 
         [ResponseCache(Duration = 51)]
@@ -64,7 +68,7 @@ namespace backend.Controllers
         [HttpGet("{id}/badges")]
         public async Task<IActionResult> GetUserBadges(string id)
         {
-            return Ok(await _repository.GetBadgesAsync(id));
+            return Ok(await _userService.GetBadgesByPlayerTagAsync(id));
         }
 
         [HttpGet("leaderboard")]

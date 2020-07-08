@@ -9,13 +9,12 @@ using Newtonsoft.Json;
 using Pekka.ClashRoyaleApi.Client.Clients;
 using Pekka.ClashRoyaleApi.Client.Contracts;
 using Pekka.ClashRoyaleApi.Client.Models.ClanModels;
-using Pekka.ClashRoyaleApi.Client.Models.LocationModels;
 using Pekka.ClashRoyaleApi.Client.Models.PlayerModels;
 using Pekka.Core;
 using Pekka.Core.Contracts;
 using RestSharp;
 
-namespace backend.Data
+namespace backend.Services.Impl
 {
     public class GameDataService : IGameDataService
     {

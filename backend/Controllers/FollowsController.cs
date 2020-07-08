@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using backend.Data;
 using backend.DTOs;
 using backend.Models;
+using backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,15 +15,13 @@ namespace backend.Controllers
     [ApiController]
     public class FollowsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-        private readonly IRepository _repository;
         private readonly UserManager<User> _userManager;
+        private readonly IFollowService _followService;
 
-        public FollowsController(UserManager<User> userManager, ApplicationDbContext context, IRepository repository)
+        public FollowsController(UserManager<User> userManager, IFollowService followService)
         {
             _userManager = userManager;
-            _context = context;
-            _repository = repository;
+            _followService = followService;
         }
 
         public async Task<IActionResult> Index()
@@ -32,10 +29,12 @@ namespace backend.Controllers
             var user = await _userManager.GetUserAsync(User);
 
             if (!user.PlayerFollows.ToList().Any() && !user.ClanFollows.ToList().Any())
+            {
                 return Ok(new {isFollowingAnyone = false});
+            }
 
-            var playerFollows = user.PlayerFollows.Select(p => new {p.PlayerTag, p.PlayerName}).ToList();
-            var clanFollows = user.ClanFollows.Select(c => new {c.ClanTag, c.ClanName}).ToList();
+            var playerFollows = _followService.GetPlayerFollowsByUser(user);
+            var clanFollows = _followService.GetClanFollowsByUser(user);
 
             return Ok(new {playerFollows, clanFollows});
         }
@@ -46,13 +45,15 @@ namespace backend.Controllers
             try
             {
                 var user = await _userManager.GetUserAsync(User);
-
-                if (user.PlayerFollows.FirstOrDefault(f => f.PlayerTag == playerUnfollowDto.Id) == null)
+                var follow = await _followService.GetPlayerFollowByPlayerTagAndUserAsync(playerUnfollowDto.Id, user);
+                
+                if (follow == null)
+                {
                     return BadRequest();
+                }
 
-                var follow = user.PlayerFollows.FirstOrDefault(f => f.PlayerTag == playerUnfollowDto.Id);
-                _repository.Delete(follow);
-                await _repository.SaveAllAsync();
+                _followService.RemovePlayerFollow(follow);
+                await _followService.SaveAllAsync();
             }
             catch (Exception e)
             {
@@ -69,11 +70,14 @@ namespace backend.Controllers
             {
                 var user = await _userManager.GetUserAsync(User);
 
-                if (user.ClanFollows.FirstOrDefault(f => f.ClanTag == clanUnfollowDto.Id) == null) return BadRequest();
+                if (user.ClanFollows.FirstOrDefault(f => f.ClanTag == clanUnfollowDto.Id) == null)
+                {
+                    return BadRequest();
+                }
 
                 var follow = user.ClanFollows.FirstOrDefault(f => f.ClanTag == clanUnfollowDto.Id);
-                _repository.Delete(follow);
-                await _repository.SaveAllAsync();
+                _followService.RemoveClanFollow(follow);
+                await _followService.SaveAllAsync();
             }
             catch (Exception e)
             {
@@ -91,11 +95,17 @@ namespace backend.Controllers
                 var user = await _userManager.GetUserAsync(User);
 
                 if (user.PlayerFollows.FirstOrDefault(f => f.PlayerTag == playerFollowDto.Id) != null)
+                {
                     return BadRequest();
-
-                user.PlayerFollows.Add(new PlayerFollow
-                    {PlayerTag = playerFollowDto.Id, PlayerName = playerFollowDto.PlayerName, Follower = user});
-                await _context.SaveChangesAsync();
+                }
+                
+                await _followService.AddPlayerFollowAsync(new PlayerFollow
+                {
+                    PlayerTag = playerFollowDto.Id,
+                    PlayerName = playerFollowDto.PlayerName,
+                    Follower = user,
+                }, user.Id);
+                await _followService.SaveAllAsync();
             }
             catch (Exception e)
             {
@@ -112,11 +122,18 @@ namespace backend.Controllers
             {
                 var user = await _userManager.GetUserAsync(User);
 
-                if (user.ClanFollows.FirstOrDefault(f => f.ClanTag == clanFollowDto.Id) != null) return BadRequest();
-
-                user.ClanFollows.Add(new ClanFollow
-                    {ClanName = clanFollowDto.ClanName, ClanTag = clanFollowDto.Id, Follower = user});
-                await _context.SaveChangesAsync();
+                if (user.ClanFollows.FirstOrDefault(f => f.ClanTag == clanFollowDto.Id) != null)
+                {
+                    return BadRequest();
+                }
+                
+                await _followService.AddClanFollowAsync(new ClanFollow
+                {
+                    ClanName = clanFollowDto.ClanName,
+                    ClanTag = clanFollowDto.Id,
+                    Follower = user,
+                }, user.Id);
+                await _followService.SaveAllAsync();
             }
             catch (Exception e)
             {

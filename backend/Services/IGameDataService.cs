@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pekka.ClashRoyaleApi.Client.Models.ClanModels;
-using Pekka.ClashRoyaleApi.Client.Models.LocationModels;
 using Pekka.ClashRoyaleApi.Client.Models.PlayerModels;
 
-namespace backend.Data
+namespace backend.Services
 {
     public interface IGameDataService
     {
