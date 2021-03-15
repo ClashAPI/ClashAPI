@@ -38,7 +38,7 @@
     "@nguniversal/express-engine": "^8.2.6",
     "@nguniversal/module-map-ngfactory-loader": "v8.2.6",
     "@sentry/browser": "^5.13.0",
-    "angular-datatables": "^8.0.0",
+    "angular-datatables": "^9.0.0",
     "bootstrap": "^4.4.1",
     "datatables.net": "^1.10.20",
     "datatables.net-dt": "^1.10.20",
